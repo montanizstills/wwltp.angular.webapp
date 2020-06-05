@@ -1,0 +1,6 @@
+language: node_js
+version: ~> 1.0
+after_faliure:
+  script: echo The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, has failed.
+after_script:
+  script: echo The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, has finshed running.
