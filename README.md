@@ -1,11 +1,27 @@
-Please familiarize yourself here: https://wwltp.atlassian.net/wiki/spaces/ONBOARDING/overview?homepageId=360476
-=======================================================================================
+# AngularWebapp
 
-Ready to move on?
----------------
-For each task/card do the following:
-  1. Please cut a branch from dev with the following command: `git checkout -b feat/[your_feat_name]`.
-  2. Please commit and push your changes to your feature branch. Ensure you are following our commit standard described here: https://wwltp.atlassian.net/wiki/spaces/ONBOARDING/pages/7602242/Submitting+work. 
-  3. Submit a pull request with the desired feature changes to the dev branch. `dev <- feat/[your_feat_name]`.
-  4. Await approval.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
 
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
