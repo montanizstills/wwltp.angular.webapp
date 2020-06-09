@@ -7,10 +7,12 @@ import { LinkserviceService } from './linkservice.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  // constructor(private linkservice: LinkserviceService) { }
-  // ngOnInit() {
-  //   this.linkservice.addTag({ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800' });
-  //   this.linkservice.addTag({ rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet' });
-  // }
+  constructor(private linkservice: LinkserviceService) { }
+  ngOnInit() {
+    //Rename LinkserviceService to InjectService
+    //modify InjectService to add children to tags [body, head, etc.]
+    //Remove <Script> from index.html and add to <HERE> this.linkservice.addTag({type:'script',src:'<url>'})
+    this.linkservice.addTag({ rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css', });
+  }
   title = 'angular-webapp';
 }
