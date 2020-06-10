@@ -15,4 +15,6 @@ export class AppComponent {
     this.linkservice.addTag({ rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css', });
   }
   title = 'angular-webapp';
+  genres = ['Action','Adventure','Sport']
+  actionGames=['Tekken','StreetFighter','MarioWorld']
 }
