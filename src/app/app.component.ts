@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { LinkserviceService } from './linkservice.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,6 +14,10 @@ export class AppComponent {
     this.linkservice.addTag({ rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css', });
   }
   title = 'angular-webapp';
+  //make Twitch API call to get Genres
   genres = ['Action','Adventure','Sport']
-  actionGames=['Tekken','StreetFighter','MarioWorld']
+  //make TwitchAPI call to get subgenres
+  //make TwitchAPI call to get game titles.
+  //Game titles will fall under Subgenres component
+
 }

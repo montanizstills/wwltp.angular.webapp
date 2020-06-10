@@ -10,8 +10,8 @@
           </form>
         </li>
         <li class="nav-item" class="explorer-li">HOME</li>
-        <li *ngFor="let game of genres" class="explorer-li">
-          {{ game }}
+        <li *ngFor="let genre of genres" class="explorer-li">
+          <genres games="['Tekken','StreetFight','MarioWorld']"></genres>
         </li>
       </ul>
     </div>
