@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'genres',
-  templateUrl: './genres.component.html',
-  styleUrls: ['./genres.component.scss']
+  selector: "genres",
+  templateUrl: "./genres.component.html",
+  styleUrls: ["./genres.component.scss"],
 })
 export class GenresComponent implements OnInit {
   title;
@@ -13,8 +13,5 @@ export class GenresComponent implements OnInit {
     //APICall
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
-

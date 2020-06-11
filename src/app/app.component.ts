@@ -19,11 +19,13 @@ export class AppComponent {
   }
   title = "angular-webapp";
   //make Twitch API call to get Genres
-  genres = ["Action", "Adventure", "Sport"];
-  subgenres = {
-    key: "Action", value: "['Tekken','StreetFighter','MarioWorld']"
-    key: "Shooter", value:"['Call of Duty','BattleField','Fortnite']"
-  };
+  // genres = ["Action", "Adventure", "Sport"];
+  genres = [
+    { Action: "['Tekken','StreetFighter','MarioWorld']" },
+    { Shooter: "['Call of Duty','BattleField','Fortnite']" },
+  ];
+  
+  
 
   //make TwitchAPI call to get subgenres
   //make TwitchAPI call to get game titles.
