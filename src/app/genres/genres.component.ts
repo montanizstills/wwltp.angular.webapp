@@ -6,8 +6,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./genres.component.scss"],
 })
 export class GenresComponent implements OnInit {
-  title;
-  subgenres;
+  params;
 
   constructor() {
     //APICall
