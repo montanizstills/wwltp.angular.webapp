@@ -6,14 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./genres.component.scss']
 })
 export class GenresComponent implements OnInit {
-subgames;
+  title;
+  subgenres;
 
-  constructor() { 
+  constructor() {
     //APICall
   }
 
   ngOnInit(): void {
   }
- 
+
 }
 

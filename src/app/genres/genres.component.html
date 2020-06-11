@@ -1,3 +1,6 @@
-<li *ngFor ='let gameTitles of subgames'>
-{{gameTitles}}
-</li>
+<div class=".container-fluid" id="dropdown">
+  {{ title }}
+  <li *ngFor="let games of subgenres" class="dropdown-content">
+    {{ games }}
+  </li>
+</div>
