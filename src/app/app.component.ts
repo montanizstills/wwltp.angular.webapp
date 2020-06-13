@@ -22,10 +22,8 @@ export class AppComponent {
   // genres = ["Action", "Adventure", "Sport"];
   genres = [
     { Action: "['Tekken','StreetFighter','MarioWorld']" },
-    { Shooter: "['Call of Duty','BattleField','Fortnite']" },
+    { Shooter: "['Call of Duty','BattleField','Fortnite']" }
   ];
-  
-  
 
   //make TwitchAPI call to get subgenres
   //make TwitchAPI call to get game titles.
