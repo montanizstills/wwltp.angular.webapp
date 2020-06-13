@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { LinkserviceService } from "./linkservice.service";
+import { DependencyInjectionService } from "./linkservice.service";
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import * as GenreActions from './actions/navbar.actions'
@@ -10,10 +10,9 @@ import * as GenreActions from './actions/navbar.actions'
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  constructor(private linkservice: LinkserviceService, private store:Store<AppState>) {}
+  constructor(private linkservice: DependencyInjectionService, private store:Store<AppState>) {}
   ngOnInit() {
-    //Rename LinkserviceService to InjectService
-    //modify InjectService to add children to tags [body, head, etc.]
+    //modify DependencyInjectionService to add children to tags [body, head, etc.]
     //Remove <Script> from index.html and add to <HERE> this.linkservice.addTag({type:'script',src:'<url>'})
     this.linkservice.addTag({
       rel: "stylesheet",

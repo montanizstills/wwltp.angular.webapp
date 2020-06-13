@@ -1,31 +1,34 @@
-import { Injectable, RendererFactory2, Inject, ViewEncapsulation } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import {
+  Injectable,
+  RendererFactory2,
+  Inject,
+  ViewEncapsulation,
+} from "@angular/core";
+import { DOCUMENT } from "@angular/common";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-export class LinkserviceService {
-
+export class DependencyInjectionService {
   constructor(
     private rendererFactory: RendererFactory2,
     @Inject(DOCUMENT) private document
-  ) { }
+  ) {}
   addTag(tag: LinkDefinition, forceCreation?: boolean) {
-
     try {
       const renderer = this.rendererFactory.createRenderer(this.document, {
-        id: '-1',
+        id: "-1",
         encapsulation: ViewEncapsulation.None,
         styles: [],
-        data: {}
+        data: {},
       });
 
-      const link = renderer.createElement('link');
+      const link = renderer.createElement("link");
       const head = this.document.head;
       const selector = this._parseSelector(tag);
 
       if (head === null) {
-        throw new Error('<head> not found within DOCUMENT.');
+        throw new Error("<head> not found within DOCUMENT.");
       }
 
       Object.keys(tag).forEach((prop: string) => {
@@ -34,15 +37,14 @@ export class LinkserviceService {
 
       // [TODO]: get them to update the existing one (if it exists) ?
       renderer.appendChild(head, link);
-
     } catch (e) {
-      console.error('Error within linkService : ', e);
+      console.error("Error within linkService : ", e);
     }
   }
 
   private _parseSelector(tag: LinkDefinition): string {
     // Possibly re-work this
-    const attr: string = tag.rel ? 'rel' : 'hreflang';
+    const attr: string = tag.rel ? "rel" : "hreflang";
     return `${attr}="${tag[attr]}"`;
   }
 }
@@ -60,5 +62,4 @@ export declare type LinkDefinition = {
   type?: string;
 } & {
   [prop: string]: string;
-}; 
-
+};
