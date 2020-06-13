@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { DependencyInjectionService } from "./linkservice.service";
+import { DependencyInjectionService } from "./dependencyinjection.service";
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import * as GenreActions from './actions/navbar.actions'
