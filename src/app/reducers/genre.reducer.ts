@@ -4,8 +4,8 @@ import { Genre } from "../models/genre.model";
 
 const defaultState: Genre = {
   //define default state.
-  key: "Action",
-  subgenres: ["Fighter", "Adventure", "Platformer"],
+  key: "Puzzle",
+  subgenres: ["Soduku", "Rubix,", "Jenga"],
 };
 
 export function GenreReducer(

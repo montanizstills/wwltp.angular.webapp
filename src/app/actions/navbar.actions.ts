@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Action } from "@ngrx/store";
 import { Genre } from 'src/app/models/genre.model';
 
-export const ADD_GENRE = "[Genre] Add";
+export const ADD_GENRE = '[Genre] Add';
 export const REMOVE_GENRE = "[Genre] Remove";
 
 

@@ -1,13 +1,5 @@
-<li *ngFor = 'let genre of genres | async'>
-  {{genre.key}}
-</li>
-<!-- <li *ngFor = "let item of {{params}} | keyvalue">
-  1
-</li> -->
-<!-- <div class=".container-fluid" id="dropdown">
-  {{this.params.index}}
-     {{ subgenre.key }} //Puzzle
-  <li *ngFor="let games of {{subgenres.value}}" class="dropdown-content">
-    {{ games }} //Rubix,Jenga,Sodoku
+<div class=".container-fluid" id="dropdown">
+  <li *ngFor = 'let genre of genres | async'>
+    {{genre.key}}
   </li>
-</div> -->
+</div>

@@ -1,12 +1,16 @@
 import { Component } from "@angular/core";
 import { LinkserviceService } from "./linkservice.service";
+import { Store } from '@ngrx/store';
+import { AppState } from './app.state';
+import * as GenreActions from './actions/navbar.actions'
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  constructor(private linkservice: LinkserviceService) {}
+  constructor(private linkservice: LinkserviceService, private store:Store<AppState>) {}
   ngOnInit() {
     //Rename LinkserviceService to InjectService
     //modify InjectService to add children to tags [body, head, etc.]
@@ -22,8 +26,14 @@ export class AppComponent {
   // genres = ["Action", "Adventure", "Sport"];
   genres = [
     { Action: "['Tekken','StreetFighter','MarioWorld']" },
-    { Shooter: "['Call of Duty','BattleField','Fortnite']" }
+    { Shooter: "['Call of Duty','BattleField','Fortnite']" },
   ];
+  
+  // genres=this.addGenre();
+
+  addGenre(key,subgenres){
+    this.store.dispatch(new GenreActions.AddGenre({key:key,subgenres:subgenres}))
+  }
 
   //make TwitchAPI call to get subgenres
   //make TwitchAPI call to get game titles.
