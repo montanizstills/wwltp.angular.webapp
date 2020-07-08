@@ -1,4 +1,5 @@
 language: node_js
+version: node
 
 # before_script:
 #   - script: echo "The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, is commencing run." > travis.log;
