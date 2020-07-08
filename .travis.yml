@@ -6,7 +6,12 @@ version: ~> 1.0
 
 # after_faliure:
 #   - script: echo "The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, has failed." > travis.log;
-#               travis logs > travis.log 
+#               travis logs > travis.log
 
 # after_script:
 #   script: echo The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, has finshed running. > travis.log;
+
+before_install:
+  - npm update
+install:
+  - npm install
