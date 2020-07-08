@@ -9,5 +9,7 @@ language: node_js
 
 # after_script:
 #   script: echo The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, has finshed running. > travis.log;
+install:
+  - npm update
 cache:
   - node_modules
