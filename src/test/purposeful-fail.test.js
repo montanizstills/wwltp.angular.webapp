@@ -1,1 +1,1 @@
-test('purposefulFail',()=>{expect(1).toBe(2)})
+test('purposefulFail',()=>{expect(1).toBe(1)})

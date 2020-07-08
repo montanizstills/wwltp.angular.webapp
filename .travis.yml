@@ -10,7 +10,8 @@ version: ~> 1.0
 
 # after_script:
 #   script: echo The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, has finshed running. > travis.log;
-
+cache:
+  -node_modules
 before_install:
   - npm update
 install:
