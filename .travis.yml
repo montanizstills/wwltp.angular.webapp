@@ -1,0 +1,18 @@
+language: node_js
+node_js: node
+
+# before_script:
+#   - script: echo "The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, is commencing run." > travis.log;
+
+# after_faliure:
+#   - script: echo "The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, has failed." > travis.log;
+#               travis logs > travis.log
+
+# after_script:
+#   script: echo The build on ${TRAVIS_PULL_REQUEST_BRANCH}, number ${TRAVIS_PULL_REQUEST}, has finshed running. > travis.log;
+
+# install:
+#   - npm update -- please update dependecies locally before pushing work.
+
+# cache:
+#   - node_modules
