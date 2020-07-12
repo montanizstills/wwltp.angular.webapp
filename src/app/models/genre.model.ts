@@ -1,8 +1,11 @@
-export class Genre {
+interface GenreInterface {
   key: String;
   subgenres: String[];
-  constructor(key, subgenres) {
-    key = key;
-    subgenres = subgenres;
+}
+export class Genre {
+  map = new Map();
+
+  constructor(obj?:GenreInterface) {
+    this.map.set(obj.key,obj.subgenres)
   }
 }

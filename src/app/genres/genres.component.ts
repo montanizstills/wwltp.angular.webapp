@@ -12,7 +12,6 @@ import { AppState } from "./../app.state";
 export class GenresComponent implements OnInit {
   genres: Observable<Genre[]>;
  
-
   constructor(private store: Store<AppState>) {
     //APICall, initialization
     this.genres = store.select("genre"); //bound to our reducer in app.module.ts

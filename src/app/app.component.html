@@ -1,14 +1,9 @@
 <router-outlet>
   <nav class="navbar navbar-dark" style="background-color: #382344;">
-    <button
-      class="navbar-toggler btn"
-      type="button"
-      data-toggle="collapse"
-      data-target="#explorer"
-      data-t
-    >
+    <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#explorer" data-t>
       Explore
     </button>
+    <!-- Hidden Dropdown info -->
     <div class="collapse navbar-collapse" id="explorer">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -17,8 +12,9 @@
           </form>
         </li>
         <li class="nav-item" class="explorer-li">HOME</li>
-        <genres class="explorer-li"></genres>
+        <genres class="nav-item" class="explorer-li"></genres>
       </ul>
     </div>
+    <!-- Hidden Dropdown info -->
   </nav>
 </router-outlet>

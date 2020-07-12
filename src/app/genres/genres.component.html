@@ -1,5 +1,9 @@
 <div class=".container-fluid" id="dropdown">
-  <li *ngFor = 'let genre of genres | async'>
-    {{genre.key}}
-  </li>
+  <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#toggler" data-t
+    *ngFor='let genre of genres | async'>{{genre.key}}</button>
+  <ul class="navbar-nav">
+    <li *ngFor="let subgenre of {{genre.subgenres}}" class="nav-item" class="explorer-li">
+      {{subgenre}}
+    </li>
+  </ul>
 </div>
