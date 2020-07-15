@@ -10,10 +10,13 @@ import { Genre } from "../models/genre.model";
 // }
 
 //define default state.
-const defaultState = new Genre().set("Puzzle", ["Soduku", "Rubix,", "Jenga"]);
+const defaultState = new Genre();
+defaultState.set("Puzzle", ["Soduku", "Rubix,", "Jenga"]);
+defaultState.set("Action", ["MarioWorld", "Enter the Matrix", "World of Warcraft"]);
+console.log(defaultState)
 
 export function GenreReducer(
-  state: Genre = defaultState,
+  state:Genre[] = [defaultState],
   action: GenreActions.Actions
 ) {
   switch (action.type) {

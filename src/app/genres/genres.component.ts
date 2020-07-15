@@ -7,15 +7,17 @@ import { AppState } from "./../app.state";
 @Component({
   selector: "genres",
   templateUrl: "./genres.component.html",
-  styleUrls: ["./genres.component.scss"],
+  styleUrls: ["./genres.component.scss"]
 })
 export class GenresComponent implements OnInit {
-  genres: Observable<Genre[]>;
- 
+  genres: Observable<Genre>;
+  subgenres=[1,2,3];
+
   constructor(private store: Store<AppState>) {
     //APICall, initialization
-    this.genres = store.select("genre"); //bound to our reducer in app.module.ts
+    this.genres = store.select("genre"); //bound to our reducer in app.module.ts 
+    console.log(this.genres)
   }
-  
-  ngOnInit(): void {}
+
+  ngOnInit(): void { }
 }
