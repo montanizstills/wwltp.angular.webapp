@@ -15,6 +15,7 @@ export class GenresComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {
     //APICall, initialization
+    this.store.dispatch(ADD_GENRE(new Map().set("Test","Data")));
     this.genres$ = store.select("genre") //bound to our reducer in app.module.ts 
     // .subscribe(map=>{console.log(map)});
     
@@ -23,6 +24,5 @@ export class GenresComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(ADD_GENRE());
    }
 }
