@@ -1,6 +1,6 @@
 <div class=".container-fluid" id="dropdown">
   <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#toggler" data-t
-    *ngFor='let genre of (genres$ | async)'>
+    *ngFor='let genre of genres$ | async; index as i'>
     <!-- {{genre | keyvalue}} -->
     hi
     <!-- Hidden Dropdown info -->

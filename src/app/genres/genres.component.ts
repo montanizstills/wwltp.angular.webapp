@@ -14,9 +14,10 @@ export class GenresComponent implements OnInit {
   // subgenres = [1, 2, 3]
 
   constructor(private store: Store<AppState>) {
+    this.store.dispatch(GenreActions.ADD_GENRE(new Map().set("Test","Data")));
+    
     //APICall, initialization
     this.genres$=this.store.pipe(select("genre"))
-    this.store.dispatch(GenreActions.ADD_GENRE(new Map().set("Test","Data")));
     // .subscribe(map=>{console.log(map)});
     
     //subscribe and pull data from Observable
