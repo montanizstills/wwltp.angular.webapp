@@ -9,6 +9,7 @@ import { StoreModule } from "@ngrx/store";
 import { GenreReducer } from "./reducers/genre.reducer";
 @NgModule({
   declarations: [AppComponent, GenresComponent],
+  // forRoot reducers apply default/startup state
   imports: [BrowserModule, AppRoutingModule, StoreModule.forRoot({genre:GenreReducer})],
   providers: [],
   bootstrap: [AppComponent],
