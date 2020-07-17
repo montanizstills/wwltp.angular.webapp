@@ -1,15 +1,13 @@
-<!-- <div class=".container-fluid" id="dropdown"> -->
+<div class=".container-fluid" id="dropdown">
   <button class="navbar-toggler btn" type="button" data-toggle="collapse" data-target="#toggler" data-t
-    *ngFor='let genre of genres | async'>
+    *ngFor='let genre of genres'>
     {{genre}}
-  </button>
-  <!-- Hidden Dropdown info -->
-  <div class="collapse navbar-collapse" id="toggler">
-    <ul class="navbar-nav">
+    <!-- Hidden Dropdown info -->
+    <!-- <div class="collapse navbar-nav navbar-collapse" id="toggler">
       <li *ngFor="let subgenre of subgenres" class="nav-item explorer-li">
         {{subgenre}}
       </li>
-    </ul>
-  </div>
-  <!-- Hidden Dropdown info -->
-<!-- </div> -->
+    </div> -->
+    <!-- Hidden Dropdown info -->
+  </button>
+</div>
