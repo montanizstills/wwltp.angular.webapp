@@ -9,13 +9,15 @@ import { AppState } from "./../app.state";
   styleUrls: ["./genres.component.scss"]
 })
 export class GenresComponent implements OnInit {
-  // genres: Observable<Map<String, String[]>>;
-  genres
+  genres$: Observable<Map<String, String[]>>;
+  // genres
   subgenres = [1, 2, 3]
 
   constructor(private store: Store<AppState>) {
     //APICall, initialization
-    this.genres = this.store.select("genre").subscribe(map=>{console.log(map)}); //bound to our reducer in app.module.ts 
+    this.genres$ = store.select("genre")
+    // .subscribe(map=>{console.log(map)}); //bound to our reducer in app.module.ts 
+    
     //subscribe and pull data from Observable
    
   }
