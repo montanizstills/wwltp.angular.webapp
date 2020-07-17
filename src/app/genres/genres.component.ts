@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import { AppState } from "./../app.state";
-import { ADD_GENRE } from '../actions/navbar.actions';
+import * as GenreActions from '../actions/navbar.actions';
 
 @Component({
   selector: "genres",
@@ -15,8 +15,8 @@ export class GenresComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {
     //APICall, initialization
-    this.store.dispatch(ADD_GENRE(new Map().set("Test","Data")));
-    this.genres$ = store.select("genre") //bound to our reducer in app.module.ts 
+    this.genres$=this.store.pipe(select("genre"))
+    this.store.dispatch(GenreActions.ADD_GENRE(new Map().set("Test","Data")));
     // .subscribe(map=>{console.log(map)});
     
     //subscribe and pull data from Observable
