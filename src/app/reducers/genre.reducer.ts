@@ -2,13 +2,10 @@ import * as GenreActions from "../actions/navbar.actions";
 import { on, createReducer, State, Action } from '@ngrx/store';
 
 //define default state.
-export const defaultState: State<Map<String, String[]>> = 
-new State(GenreActions,GenreReducer,"",null)
+export const defaultState: Map<String, String[]> = new Map();
 
-defaultState.next({"":["",""]})
-
-// defaultState.set("Puzzle", ["Soduku", "Rubix,", "Jenga"]);
-// defaultState.set("Action", ["MarioWorld", "Enter the Matrix", "World of Warcraft"])
+defaultState.set("Puzzle", ["Soduku", "Rubix,", "Jenga"]);
+defaultState.set("Action", ["MarioWorld", "Enter the Matrix", "World of Warcraft"])
 
 const _reducerAddGenre = (k: String, v: String[]) =>
   createReducer(
@@ -29,7 +26,7 @@ const _reducerRemoveGenre = (k: String) =>
       }
     ));
 
-export function GenreReducer(state: State<Map<String, String[]>> = defaultState, action: Action) {
+export function GenreReducer(state = defaultState, action: Action) {
   switch (action.type) {
     case GenreActions.ADD_GENRE:
       return _reducerAddGenre(state, action);
