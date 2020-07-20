@@ -21,6 +21,7 @@
     "@angular/router": "^9.1.11",
     "@ngrx/data": "^9.2.0",
     "@ngrx/entity": "^9.2.0",
+    "@ngrx/schematics": "^9.2.0",
     "@ngrx/store": "^9.2.0",
     "rxjs": "^6.5.5",
     "rxjs-compat": "^6.5.5",
