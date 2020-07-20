@@ -10,11 +10,13 @@ import { GenreReducer } from "./reducers/genre.reducer";
 
 import { EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [AppComponent, GenresComponent],
   // forRoot reducers apply default/startup state
-  imports: [BrowserModule, AppRoutingModule, StoreModule.forRoot({genre:GenreReducer}), EntityDataModule.forRoot(entityConfig)],
+  imports: [BrowserModule, AppRoutingModule, StoreModule.forRoot({genre:GenreReducer}), EntityDataModule.forRoot(entityConfig), EffectsModule.forRoot([AppEffects, AppEffects, ])],
   providers: [],
   bootstrap: [AppComponent],
 })
