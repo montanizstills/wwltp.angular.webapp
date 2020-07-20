@@ -8,10 +8,13 @@ import { GenresComponent } from "./genres/genres.component";
 import { StoreModule } from "@ngrx/store";
 import { GenreReducer } from "./reducers/genre.reducer";
 
+import { EntityDataModule } from '@ngrx/data';
+import { entityConfig } from './entity-metadata';
+
 @NgModule({
   declarations: [AppComponent, GenresComponent],
   // forRoot reducers apply default/startup state
-  imports: [BrowserModule, AppRoutingModule, StoreModule.forRoot({genre:GenreReducer})],
+  imports: [BrowserModule, AppRoutingModule, StoreModule.forRoot({genre:GenreReducer}), EntityDataModule.forRoot(entityConfig)],
   providers: [],
   bootstrap: [AppComponent],
 })
