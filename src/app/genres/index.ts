@@ -24,10 +24,10 @@ export const initialState: GenreState = {
   error: undefined
 }
 
-export const reducers =createReducer(
+export const reducers = createReducer(
   initialState,
-  on(loadGenres,(state,action)=>{
-    return {genres:action.genres}
+  on(loadGenres, (state, action) => {
+    return { genres: action.genres }
   })
 )
 

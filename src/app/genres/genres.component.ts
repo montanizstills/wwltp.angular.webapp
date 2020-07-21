@@ -12,7 +12,7 @@ import * as fromGenreActions from './genre.actions'
 })
 export class GenresComponent implements OnInit {
   genres$: Observable<Map<String, String[]>>;
-  genres;
+  genres=[{id:"one"},{id:"two"}];
 
   // subgenres = [1, 2, 3]
 
