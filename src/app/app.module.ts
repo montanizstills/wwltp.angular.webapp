@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import {HttpClientModule} from "@angular/common/http"
 
 import { GenresComponent } from "./genres/genres.component";
 import * as fromGenre from './genres/genre.reducer';
@@ -27,11 +28,13 @@ import { GenreEffects } from './genres/genre.effects';
   declarations: [AppComponent, GenresComponent],
   // forRoot reducers apply default/startup state
   imports: [BrowserModule, 
-    AppRoutingModule, 
+    AppRoutingModule,
+    HttpClientModule, 
     EntityDataModule.forRoot(entityConfig), 
     EffectsModule.forRoot([AppEffects, AppEffects, ]),
     StoreRouterConnectingModule.forRoot(), 
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot({}),
     StoreModule.forFeature(fromGenre.genresFeatureKey, fromGenre.reducer),
     EffectsModule.forFeature([GenreEffects])],
   providers: [],
