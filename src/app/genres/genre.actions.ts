@@ -4,50 +4,50 @@ import { Update } from '@ngrx/entity';
 import { Genre } from './genre.model';
 
 export const loadGenres = createAction(
-  '[Genre/API] Load Genres', 
+  '[Genre] Load Genres', 
   props<{ genres: Genre[] }>()
 );
 
 export const addGenre = createAction(
-  '[Genre/API] Add Genre',
+  '[Genre] Add Genre',
   props<{ genre: Genre }>()
 );
 
 export const upsertGenre = createAction(
-  '[Genre/API] Upsert Genre',
+  '[Genre] Upsert Genre',
   props<{ genre: Genre }>()
 );
 
 export const addGenres = createAction(
-  '[Genre/API] Add Genres',
+  '[Genre] Add Genres',
   props<{ genres: Genre[] }>()
 );
 
 export const upsertGenres = createAction(
-  '[Genre/API] Upsert Genres',
+  '[Genre] Upsert Genres',
   props<{ genres: Genre[] }>()
 );
 
 export const updateGenre = createAction(
-  '[Genre/API] Update Genre',
+  '[Genre] Update Genre',
   props<{ genre: Update<Genre> }>()
 );
 
 export const updateGenres = createAction(
-  '[Genre/API] Update Genres',
+  '[Genre] Update Genres',
   props<{ genres: Update<Genre>[] }>()
 );
 
 export const deleteGenre = createAction(
-  '[Genre/API] Delete Genre',
+  '[Genre] Delete Genre',
   props<{ id: string }>()
 );
 
 export const deleteGenres = createAction(
-  '[Genre/API] Delete Genres',
+  '[Genre] Delete Genres',
   props<{ ids: string[] }>()
 );
 
 export const clearGenres = createAction(
-  '[Genre/API] Clear Genres'
+  '[Genre] Clear Genres'
 );

@@ -32,12 +32,16 @@ import { GenreEffects } from './genres/genre.effects';
     HttpClientModule, 
     // StoreModule.forRoot({}, {}),
     StoreModule.forFeature(fromGenreState.genreStateFeatureKey, fromGenreState.reducers, { metaReducers: fromGenreState.metaReducers }),
+    
     EntityDataModule.forRoot(entityConfig), 
+    
     EffectsModule.forRoot([AppEffects, AppEffects, ]),
+    EffectsModule.forFeature([GenreEffects]),
+    
     StoreRouterConnectingModule.forRoot(), 
+    
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     // StoreModule.forFeature(fromGenre.genresFeatureKey, fromGenre.reducer),
-    EffectsModule.forFeature([GenreEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

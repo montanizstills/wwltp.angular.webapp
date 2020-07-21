@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Store, select } from "@ngrx/store";
+import { GenreState } from '.';
+import * as fromGenreActions from './genre.actions'
 
 
 @Component({
@@ -10,21 +12,19 @@ import { Store, select } from "@ngrx/store";
 })
 export class GenresComponent implements OnInit {
   genres$: Observable<Map<String, String[]>>;
+  genres;
+
   // subgenres = [1, 2, 3]
 
-  // constructor(private store: Store<AppState>) {
-  //   this.store.dispatch(GenreActions.ADD_GENRE(new Map().set("Test","Data")));
-    
   //   //APICall, initialization
   //   this.genres$=this.store.pipe(select("genre"))
   //   // .subscribe(map=>{console.log(map)});
-    
-  //   //subscribe and pull data from Observable
-   
-  // }
 
-  constructor(){}
-  
+  constructor(private store: Store<GenreState>) { }
+
   ngOnInit(): void {
-   }
+    this.store.dispatch(fromGenreActions.loadGenres(this.genres))
+  }
+
+  loadGenres() { }
 }
