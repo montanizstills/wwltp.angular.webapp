@@ -7,6 +7,7 @@ import {HttpClientModule} from "@angular/common/http"
 
 import { GenresComponent } from "./genres/genres.component";
 import * as fromGenre from './genres/genre.reducer';
+import * as fromGenreState from './genres';
 
 import { StoreModule } from "@ngrx/store";
 
@@ -23,19 +24,19 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { GenreEffects } from './genres/genre.effects';
 
-
 @NgModule({
   declarations: [AppComponent, GenresComponent],
   // forRoot reducers apply default/startup state
   imports: [BrowserModule, 
     AppRoutingModule,
     HttpClientModule, 
-    StoreModule.forRoot({}, {}),
+    // StoreModule.forRoot({}, {}),
+    StoreModule.forFeature(fromGenreState.genreStateFeatureKey, fromGenreState.reducers, { metaReducers: fromGenreState.metaReducers }),
     EntityDataModule.forRoot(entityConfig), 
     EffectsModule.forRoot([AppEffects, AppEffects, ]),
     StoreRouterConnectingModule.forRoot(), 
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forFeature(fromGenre.genresFeatureKey, fromGenre.reducer),
+    // StoreModule.forFeature(fromGenre.genresFeatureKey, fromGenre.reducer),
     EffectsModule.forFeature([GenreEffects]),
   ],
   providers: [],
