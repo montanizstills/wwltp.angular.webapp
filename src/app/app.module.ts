@@ -20,6 +20,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { environment } from '../environments/environment';
+import { GenreEffects } from './genres/genre.effects';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { environment } from '../environments/environment';
     EffectsModule.forRoot([AppEffects, AppEffects, ]),
     StoreRouterConnectingModule.forRoot(), 
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forFeature(fromGenre.genresFeatureKey, fromGenre.reducer)],
+    StoreModule.forFeature(fromGenre.genresFeatureKey, fromGenre.reducer),
+    EffectsModule.forFeature([GenreEffects])],
   providers: [],
   bootstrap: [AppComponent],
 })
