@@ -1,8 +1,5 @@
 import { Component } from "@angular/core";
 import { DependencyInjectionService } from "./dependencyinjection.service";
-import { Store } from "@ngrx/store";
-import { AppState } from "./app.state";
-import * as GenreActions from "./actions/navbar.actions";
 import { Genre } from "./models/genre.model";
 
 @Component({
@@ -13,7 +10,6 @@ import { Genre } from "./models/genre.model";
 export class AppComponent {
   constructor(
     private linkservice: DependencyInjectionService,
-    private store: Store<AppState>
   ) {}
   ngOnInit() {
     // Add all dependencies via AppComponent
