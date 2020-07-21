@@ -5,13 +5,13 @@ import * as GenreActions from './genre.actions';
 
 export const genresFeatureKey = 'genres';
 
-export interface State extends EntityState<Genre> {
+export interface GenreState extends EntityState<Genre> {
   // additional entities state properties
 }
 
 export const adapter: EntityAdapter<Genre> = createEntityAdapter<Genre>();
 
-export const initialState: State = adapter.getInitialState({
+export const initialState: GenreState = adapter.getInitialState({
   // additional entity state properties
 });
 
