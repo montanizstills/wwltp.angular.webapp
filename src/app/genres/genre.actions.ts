@@ -4,8 +4,17 @@ import { Update } from '@ngrx/entity';
 import { Genre } from './genre.model';
 
 export const loadGenres = createAction(
-  '[Genre] Load Genres', 
+  '[Genre] Load Genres',
+);
+
+export const loadGenresSuccess = createAction(
+  '[Genre] Load Genres Success',
   props<{ genres: Genre[] }>()
+);
+
+export const loadGenresFailure = createAction(
+  '[Genre] Load Genres Failure',
+  props<{ error: any }>()
 );
 
 export const addGenre = createAction(

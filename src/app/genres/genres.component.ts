@@ -3,7 +3,7 @@ import { Observable } from "rxjs/Observable";
 import { Store, select } from "@ngrx/store";
 import { GenreState } from '.';
 import * as fromGenreActions from './genre.actions'
-
+import {Genre} from './genre.model'
 
 @Component({
   selector: "genres",
@@ -12,7 +12,7 @@ import * as fromGenreActions from './genre.actions'
 })
 export class GenresComponent implements OnInit {
   genres$: Observable<Map<String, String[]>>;
-  genres=[{id:"one"},{id:"two"}];
+  genres:Genre[]=[];
 
   // subgenres = [1, 2, 3]
 
@@ -23,7 +23,7 @@ export class GenresComponent implements OnInit {
   constructor(private store: Store<GenreState>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(fromGenreActions.loadGenres(this.genres))
+    this.store.dispatch(fromGenreActions.loadGenresSuccess({genres:this.genres}))
   }
 
   loadGenres() { }

@@ -1,7 +1,8 @@
 export interface Genre {
   //allows any property whose name is a string to take on any value
   //   readonly [prop: string]: any
-  id: string;
+  id: String;
+  subgenres: Array<String>
 }
 
 // export class Genre extends Map implements GenreInterface {

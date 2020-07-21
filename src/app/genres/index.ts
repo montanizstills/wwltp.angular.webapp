@@ -9,7 +9,7 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import { Genre } from './genre.model';
-import { loadGenres } from './genre.actions';
+import { loadGenres, loadGenresSuccess, loadGenresFailure } from './genre.actions';
 import { Action } from 'rxjs/internal/scheduler/Action';
 
 export const genreStateFeatureKey = 'genreState';
@@ -26,8 +26,11 @@ export const initialState: GenreState = {
 
 export const reducers = createReducer(
   initialState,
-  on(loadGenres, (state, action) => {
+  on(loadGenresSuccess, (state, action) => {
     return { genres: action.genres }
+  }),
+  on(loadGenresFailure, (state, action) => {
+    return { genres: state.genres, error: action.error }
   })
 )
 
