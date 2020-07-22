@@ -5,6 +5,7 @@ import { Genre } from './genre.model';
 
 export const loadGenres = createAction(
   '[Genre] Load Genres',
+  props<{genres: Genre[]}>()
 );
 
 export const loadGenresSuccess = createAction(

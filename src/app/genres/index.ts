@@ -34,4 +34,11 @@ export const reducers = createReducer(
   })
 )
 
+//slice from store = GenreState
+export const selectGenreFeature = createFeatureSelector<GenreState>(genreStateFeatureKey)
+
+//genres within slice
+export const selectGenres = createSelector(selectGenreFeature,
+  (state: GenreState) => state.genres)
+
 export const metaReducers: MetaReducer<GenreState>[] = !environment.production ? [] : [];

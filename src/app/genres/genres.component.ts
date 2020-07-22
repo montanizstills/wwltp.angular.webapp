@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Store, select } from "@ngrx/store";
-import { GenreState } from '.';
+import { GenreState, selectGenres } from '.';
 import * as fromGenreActions from './genre.actions'
-import {Genre} from './genre.model'
+import { Genre } from './genre.model'
 
 @Component({
   selector: "genres",
@@ -11,19 +11,20 @@ import {Genre} from './genre.model'
   styleUrls: ["./genres.component.scss"]
 })
 export class GenresComponent implements OnInit {
-  genres$: Observable<Map<String, String[]>>;
-  genres:Genre[]=[];
+  genres$: Observable<Genre[]>;
+  genres: Genre[] = [];
 
   // subgenres = [1, 2, 3]
 
-  //   //APICall, initialization
-  //   this.genres$=this.store.pipe(select("genre"))
-  //   // .subscribe(map=>{console.log(map)});
+  // APICall, initialization
+  // this.genres$=this.store.pipe(select("genre"))
+  // .subscribe(map=>{console.log(map)});
 
   constructor(private store: Store<GenreState>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(fromGenreActions.loadGenresSuccess({genres:this.genres}))
+    this.store.dispatch(fromGenreActions.loadGenresSuccess({ genres: this.genres }))
+    this.genres$ = this.store.pipe(select(selectGenres))
   }
 
   loadGenres() { }
