@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector, MetaReducer, createReducer, on } from '@ngrx/store';
-import { environment } from '../../environments/environment';
-import { Genre } from './genre.model';
-import { loadGenresSuccess, loadGenresFailure } from './genre.actions';
+import { environment } from '../../../environments/environment';
+import { Genre } from './models/genre.model';
+import { loadGenresSuccess, loadGenresFailure } from './actions/genre.actions';
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity'
 
 export const genreStateFeatureKey = 'genreState';

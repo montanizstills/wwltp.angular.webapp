@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Genre } from './genre.model';
+import { Genre } from '../models/genre.model';
 
 //Add Genre
 export const addGenre = createAction(

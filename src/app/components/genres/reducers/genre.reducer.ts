@@ -1,25 +1,34 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Genre } from './genre.model';
-import * as GenreActions from './genre.actions';
+import { Genre } from '../models/genre.model';
+import * as GenreActions from '../actions/genre.actions';
 
 export const genresFeatureKey = 'genres';
 
 export interface GenreState extends EntityState<Genre> {
   // additional entities state properties
+  error: any;
 }
 
 export const adapter: EntityAdapter<Genre> = createEntityAdapter<Genre>();
 
 export const initialState: GenreState = adapter.getInitialState({
   // additional entity state properties
+  error: undefined
 });
 
 export const genreReducer = createReducer(
   initialState,
-  on(GenreActions.addGenre,
+  on(GenreActions.addGenreSuccess,
     (state, action) => adapter.addOne(action.genre, state)
   ),
+  on(GenreActions.addGenreFailure,
+    (state, action) => {
+      return {
+        ...state,
+        error: action.error
+      }
+    }),
   on(GenreActions.upsertGenre,
     (state, action) => adapter.upsertOne(action.genre, state)
   ),

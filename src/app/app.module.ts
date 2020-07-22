@@ -7,7 +7,7 @@ import { HttpClientModule } from "@angular/common/http"
 
 import { GenresComponent } from "./genres/genres.component";
 import * as fromGenreState from './genres';
-import { GenreEffects } from './genres/genre.effects';
+import { GenreEffects } from "./components/genres/effects/genre.effects"
 
 import { StoreModule } from "@ngrx/store";
 

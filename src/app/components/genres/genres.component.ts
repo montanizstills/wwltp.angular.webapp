@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Store, select } from "@ngrx/store";
 import { GenreState, selectGenres } from '.';
-import * as fromGenreActions from './genre.actions'
-import { Genre } from './genre.model'
+import * as fromGenreActions from './actions/genre.actions'
+import { Genre } from './models/genre.model'
 
 @Component({
   selector: "genres",
