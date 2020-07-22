@@ -1,8 +1,29 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-
 import { Genre } from './genre.model';
 
+//Add Genre
+export const addGenre = createAction(
+  '[Genre] Add Genre',
+  props<{ genre: Genre }>()
+);
+
+export const addGenreSuccess = createAction(
+  '[Genre Add Effect] Add Genre Success',
+  props<{ genre: Genre }>()
+);
+
+export const addGenreFailure = createAction(
+  '[Genre Add Effect] Add Genre Failure',
+  props<{ error: any }>()
+);
+
+export const addGenres = createAction(
+  '[Genre] Add Genres',
+  props<{ genres: Genre[] }>()
+);
+
+//Load Genre
 export const loadGenres = createAction(
   '[Genre] Load Genres',
   props<{genres: Genre[]}>()
@@ -18,19 +39,10 @@ export const loadGenresFailure = createAction(
   props<{ error: any }>()
 );
 
-export const addGenre = createAction(
-  '[Genre] Add Genre',
-  props<{ genre: Genre }>()
-);
-
+// Upsert Genre - update if not create
 export const upsertGenre = createAction(
   '[Genre] Upsert Genre',
   props<{ genre: Genre }>()
-);
-
-export const addGenres = createAction(
-  '[Genre] Add Genres',
-  props<{ genres: Genre[] }>()
 );
 
 export const upsertGenres = createAction(
@@ -38,6 +50,7 @@ export const upsertGenres = createAction(
   props<{ genres: Genre[] }>()
 );
 
+// Update Genre
 export const updateGenre = createAction(
   '[Genre] Update Genre',
   props<{ genre: Update<Genre> }>()
@@ -48,6 +61,7 @@ export const updateGenres = createAction(
   props<{ genres: Update<Genre>[] }>()
 );
 
+//Delete Genre
 export const deleteGenre = createAction(
   '[Genre] Delete Genre',
   props<{ id: string }>()
@@ -58,6 +72,7 @@ export const deleteGenres = createAction(
   props<{ ids: string[] }>()
 );
 
+//Clear Genre
 export const clearGenres = createAction(
   '[Genre] Clear Genres'
 );
