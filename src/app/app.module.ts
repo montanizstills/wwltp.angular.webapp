@@ -5,8 +5,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http"
 
-import { GenresComponent } from "./genres/genres.component";
-import * as fromGenreState from './genres';
+import { GenresComponent } from "./components/navbar/genres/genres.component";
+import * as fromGenreState from './components/navbar/genres';
 import { GenreEffects } from "./components/navbar/genres/effects/genre.effects"
 
 import { StoreModule } from "@ngrx/store";

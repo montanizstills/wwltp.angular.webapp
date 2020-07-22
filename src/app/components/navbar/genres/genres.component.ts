@@ -11,22 +11,18 @@ import { Genre } from './models/genre.model'
   styleUrls: ["./genres.component.scss"]
 })
 export class GenresComponent implements OnInit {
+  
   genres$: Observable<Genre[]>;
-  genres: Genre[] = [];
-
-  // subgenres = [1, 2, 3]
-
-  // APICall, initialization
-  // this.genres$=this.store.pipe(select("genre"))
-  // .subscribe(map=>{console.log(map)});
-
+  
   constructor(private store: Store<GenreState>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(fromGenreActions.loadGenresSuccess({ genres: this.genres }))
+    this.loadGenres();
   }
 
   loadGenres() {
     this.genres$ = this.store.pipe(select(selectGenres))
    }
+
+   // APICall, initialization
 }

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { DependencyInjectionService } from "./dependencyinjection.service";
-import { Genre } from "./genres/models/genre.model";
+import { Genre } from "./components/navbar/genres/models/genre.model";
 
 @Component({
   selector: "app-root",
