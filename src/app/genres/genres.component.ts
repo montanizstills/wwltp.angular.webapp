@@ -24,8 +24,9 @@ export class GenresComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(fromGenreActions.loadGenresSuccess({ genres: this.genres }))
-    this.genres$ = this.store.pipe(select(selectGenres))
   }
 
-  loadGenres() { }
+  loadGenres() {
+    this.genres$ = this.store.pipe(select(selectGenres))
+   }
 }

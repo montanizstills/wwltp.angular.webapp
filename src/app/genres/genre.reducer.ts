@@ -15,8 +15,7 @@ export const initialState: GenreState = adapter.getInitialState({
   // additional entity state properties
 });
 
-
-export const reducer = createReducer(
+export const genreReducer = createReducer(
   initialState,
   on(GenreActions.addGenre,
     (state, action) => adapter.addOne(action.genre, state)
@@ -50,6 +49,9 @@ export const reducer = createReducer(
   ),
 );
 
+export function reducer(state: GenreState, action: Action) {
+  return genreReducer(state, action);
+}
 
 export const {
   selectIds,

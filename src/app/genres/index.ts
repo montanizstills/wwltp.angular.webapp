@@ -1,44 +1,40 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer,
-  createReducer,
-  on
-} from '@ngrx/store';
+import { createFeatureSelector, createSelector, MetaReducer, createReducer, on } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import { Genre } from './genre.model';
-import { loadGenres, loadGenresSuccess, loadGenresFailure } from './genre.actions';
-import { Action } from 'rxjs/internal/scheduler/Action';
+import { loadGenresSuccess, loadGenresFailure } from './genre.actions';
+import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity'
 
 export const genreStateFeatureKey = 'genreState';
 
-export interface GenreState {
-  genres: Genre[],
+export interface GenreState extends EntityState<Genre> {
   error: any
 }
 
-export const initialState: GenreState = {
-  genres: undefined,
-  error: undefined
-}
+export const adapter: EntityAdapter<Genre> = createEntityAdapter<Genre>()
+
+
+export const initialState = adapter.getInitialState({ error: undefined });
 
 export const reducers = createReducer(
   initialState,
   on(loadGenresSuccess, (state, action) => {
-    return { genres: action.genres }
+    return adapter.addAll(action.genres, state)
   }),
   on(loadGenresFailure, (state, action) => {
-    return { genres: state.genres, error: action.error }
+    return { error: action.error }
   })
 )
 
 //slice from store = GenreState
 export const selectGenreFeature = createFeatureSelector<GenreState>(genreStateFeatureKey)
 
-//genres within slice
+//Selector: genres within slice
 export const selectGenres = createSelector(selectGenreFeature,
-  (state: GenreState) => state.genres)
+  adapter.getSelectors().selectAll)
+
+  //Selector : errors within slice
+export const selectError = createSelector(selectGenreFeature,
+  (state: GenreState) => state.error)
 
 export const metaReducers: MetaReducer<GenreState>[] = !environment.production ? [] : [];
+ 
