@@ -6,7 +6,7 @@ import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http"
 
 import { GenresComponent } from "./components/navbar/genres/genres.component";
-import * as fromGenreState from './components/navbar/genres';
+import * as fromGenreState from './components/navbar/genres/reducers/genre.reducer';
 import { GenreEffects } from "./components/navbar/genres/effects/genre.effects"
 
 import { StoreModule } from "@ngrx/store";
@@ -31,7 +31,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
 
     StoreModule.forRoot({}, {}),
-    StoreModule.forFeature(fromGenreState.genreStateFeatureKey, fromGenreState.reducers, { metaReducers: fromGenreState.metaReducers }),
+    StoreModule.forFeature(fromGenreState.genreStateFeatureKey, fromGenreState.reducer, { metaReducers: fromGenreState.metaReducers }),
 
     EntityDataModule.forRoot(entityConfig),
 

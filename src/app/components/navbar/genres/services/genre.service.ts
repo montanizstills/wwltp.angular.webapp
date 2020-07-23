@@ -11,6 +11,6 @@ export class GenreService{
     }
 
     getGenres():Observable<Genre[]>{
-        return of([{id:"Puzzle", subgenres:["One","Two","Three"]}])
+        return of([{id:"Puzzle"}])
     }
 }

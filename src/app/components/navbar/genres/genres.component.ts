@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Store, select } from "@ngrx/store";
-import { GenreState, selectGenres } from '.';
+import { selectGenres } from './selectors/genre.selector';
+import { GenreState } from './reducers/genre.reducer'
 import * as fromGenreActions from './actions/genre.actions'
 import { Genre } from './models/genre.model'
 import { GenreService } from './services/genre.service';
@@ -12,22 +13,26 @@ import { GenreService } from './services/genre.service';
   styleUrls: ["./genres.component.scss"]
 })
 export class GenresComponent implements OnInit {
-  
+
   genres$: Observable<Genre[]>;
-  
-  constructor(private store: Store<GenreState>, private genreService:GenreService) { }
+
+  constructor(private store: Store<GenreState>, private genreService: GenreService) {
+    this.addGenre();
+    this.loadGenres();
+    console.log(this.genres$)
+  }
 
   ngOnInit(): void {
-    this.loadGenres();
+
   }
 
   loadGenres() {
     this.genres$ = this.store.pipe(select(selectGenres))
-   }
+  }
 
-   addGenre(){
-     this.store.dispatch(fromGenreActions.addGenre({genre: {id:"test", subgenres:[]}}))
-   }
+  addGenre() {
+    this.store.dispatch(fromGenreActions.addGenre({ genre: { id: "test" } }))
+  }
 
-   // APICall, initialization
+  // APICall, initialization
 }
