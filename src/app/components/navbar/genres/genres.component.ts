@@ -20,31 +20,44 @@ import { pipe } from 'rxjs';
 export class GenresComponent implements OnInit {
 
   genres$: Observable<Genre[]>;
-  
+
   //headers
   readonly headers = {
     'Authorization': "Bearer <token>",
     'Content-Type': "application/json",
-    'Access-Control-Allow-Origin':"*"
+    'Access-Control-Allow-Origin': "*"
   }
   requestOptions = {
     headers: new HttpHeaders(this.headers)
   }
 
   //redirect -- for client 
-  redirect="http://localhost:4200"
-  
+  redirect = "http://localhost:4200"
+
   // auth paths
-  s2sPath = "https://id.twitch.tv/oauth2/token?client_id=" + env.TWITCH_CLIENT_ID + "&client_secret=" + env.TWITCH_CLIENT_SECRET + "&grant_type=client_credentials" //sever-to-server
-  clientPath = "https://id.twitch.tv/oauth2/authorize?client_id="+env.TWITCH_CLIENT_ID+"&redirect_uri="+this.redirect+"&response_type=token&scope=[]"
+  s2sPath = "https://id.twitch.tv/oauth2/token?client_id=" + env.TWITCH_CLIENT_ID + "&client_secret=" + env.TWITCH_CLIENT_SECRET + "&grant_type=client_credentials" //sever-to-server, returns token
+  clientPath = "https://id.twitch.tv/oauth2/authorize?client_id=" + env.TWITCH_CLIENT_ID + "&redirect_uri=" + this.redirect + "&response_type=token&scope=[]"
 
   constructor(private store: Store<GenreState>, private genreService: GenreService, private http: HttpClient) {
   }
 
   ngOnInit(): void {
-    this.http.post(this.s2sPath, "", this.requestOptions)
+
+    this.http.post(this.s2sPath, null, {
+      headers:
+      {
+        'Content-Type': "application/json",
+      }
+    })
       .subscribe(res => {
-        this.http.get("https://api.twitch.tv/helix/games/top", { headers:  {header: 'Authorization: Bearer '+res}  })
+        console.log(res['access_token']);
+        this.http.get("https://api.twitch.tv/helix/games/top", {
+          headers:
+          {
+            'Content-Type': "application/json",
+            'Authorization': "Bearer " + res['access_token']
+          }
+        })
           .subscribe(res => {
             console.log(res)
           })
