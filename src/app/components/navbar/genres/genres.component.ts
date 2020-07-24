@@ -55,7 +55,8 @@ export class GenresComponent implements OnInit {
           headers:
           {
             'Content-Type': "application/json",
-            'Authorization': "Bearer " + res['access_token']
+            'Authorization': "Bearer " + res['access_token'],
+            'Client-ID': env.TWITCH_CLIENT_ID
           }
         })
           .subscribe(res => {
