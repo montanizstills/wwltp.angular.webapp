@@ -23,7 +23,7 @@ export class GenresComponent implements OnInit {
   
   //headers
   readonly headers = {
-    'Authorization': "Bearer lxyxac29b1cpqimcah81al7mcqqgy",
+    'Authorization': "Bearer <token>",
     'Content-Type': "application/json",
     'Access-Control-Allow-Origin':"*"
   }
