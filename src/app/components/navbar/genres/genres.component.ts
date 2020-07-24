@@ -1,3 +1,4 @@
+declare var require: any
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Store, select } from "@ngrx/store";
@@ -6,33 +7,58 @@ import { GenreState } from './reducers/genre.reducer'
 import * as fromGenreActions from './actions/genre.actions'
 import { Genre } from './models/genre.model'
 import { GenreService } from './services/genre.service';
+import * as env from "ignore/env"
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: "genres",
   templateUrl: "./genres.component.html",
   styleUrls: ["./genres.component.scss"]
 })
+
 export class GenresComponent implements OnInit {
 
   genres$: Observable<Genre[]>;
+  
+  //headers
+  readonly headers = {
+    'Authorization': "Bearer lxyxac29b1cpqimcah81al7mcqqgy",
+    'Content-Type': "application/json",
+    'Access-Control-Allow-Origin':"*"
+  }
+  requestOptions = {
+    headers: new HttpHeaders(this.headers)
+  }
 
-  constructor(private store: Store<GenreState>, private genreService: GenreService) {
-    this.addGenre();
-    this.loadGenres();
-    console.log(this.genres$)
+  //redirect -- for client 
+  redirect="http://localhost:4200"
+  
+  // auth paths
+  s2sPath = "https://id.twitch.tv/oauth2/token?client_id=" + env.TWITCH_CLIENT_ID + "&client_secret=" + env.TWITCH_CLIENT_SECRET + "&grant_type=client_credentials" //sever-to-server
+  clientPath = "https://id.twitch.tv/oauth2/authorize?client_id="+env.TWITCH_CLIENT_ID+"&redirect_uri="+this.redirect+"&response_type=token&scope=[]"
+
+  constructor(private store: Store<GenreState>, private genreService: GenreService, private http: HttpClient) {
   }
 
   ngOnInit(): void {
+    this.http.post(this.s2sPath, "", this.requestOptions)
+      .subscribe(res => {
+        this.http.get("https://api.twitch.tv/helix/games/top", { headers:  {header: 'Authorization: Bearer '+res}  })
+          .subscribe(res => {
+            console.log(res)
+          })
+      })
 
   }
 
-  loadGenres() {
-    this.genres$ = this.store.pipe(select(selectGenres))
-  }
+  // loadGenres() {
+  //   this.genres$ = this.store.pipe(select(selectGenres))
+  // }
+  // addGenre() {
+  //   this.store.dispatch(fromGenreActions.addGenre({ genre: { id: "test" } }))
+  // }
 
-  addGenre() {
-    this.store.dispatch(fromGenreActions.addGenre({ genre: { id: "test" } }))
-  }
 
   // APICall, initialization
 }
