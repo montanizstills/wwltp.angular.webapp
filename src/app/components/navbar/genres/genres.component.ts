@@ -20,6 +20,7 @@ import { pipe } from 'rxjs';
 export class GenresComponent implements OnInit {
 
   genres$: Observable<Genre[]>;
+  boxart: String[]
 
   //headers
   readonly headers = {
@@ -39,31 +40,41 @@ export class GenresComponent implements OnInit {
   clientPath = "https://id.twitch.tv/oauth2/authorize?client_id=" + env.TWITCH_CLIENT_ID + "&redirect_uri=" + this.redirect + "&response_type=token&scope=[]"
 
   constructor(private store: Store<GenreState>, private genreService: GenreService, private http: HttpClient) {
+  
   }
 
   ngOnInit(): void {
+    if(!sessionStorage.getItem('access_token')){
+      this.createToken()
+    }
+  }
 
-    this.http.post(this.s2sPath, null, {
-      headers:
-      {
-        'Content-Type': "application/json",
-      }
-    })
-      .subscribe(res => {
-        console.log(res['access_token']);
-        this.http.get("https://api.twitch.tv/helix/games/top", {
+createToken(){
+  this.http.post(this.s2sPath, null, {
+    headers:
+    {
+      'Content-Type': "application/json",
+    }
+  }).subscribe(res=>sessionStorage.setItem('access_token',res['access_token']))
+}
+
+getToken(){
+  return sessionStorage.getItem("access_token")
+}
+
+  getTopGames(){
+    this.http.get("https://api.twitch.tv/helix/games/top", {
           headers:
           {
             'Content-Type': "application/json",
-            'Authorization': "Bearer " + res['access_token'],
+            'Authorization': "Bearer " + this.getToken(),
             'Client-ID': env.TWITCH_CLIENT_ID
           }
         })
           .subscribe(res => {
             console.log(res)
+            this.boxart=res['box_art_url'];
           })
-      })
-
   }
 
   // loadGenres() {
