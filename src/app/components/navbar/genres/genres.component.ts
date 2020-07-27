@@ -21,61 +21,29 @@ export class GenresComponent implements OnInit {
 
   genres$: Observable<Genre[]>;
   boxart: String[]
-
-  //headers
-  readonly headers = {
-    'Authorization': "Bearer <token>",
-    'Content-Type': "application/json",
-    'Access-Control-Allow-Origin': "*"
-  }
-  requestOptions = {
-    headers: new HttpHeaders(this.headers)
-  }
-
-  //redirect -- for client 
-  redirect = "http://localhost:4200"
-
-  // auth paths
-  s2sPath = "https://id.twitch.tv/oauth2/token?client_id=" + env.TWITCH_CLIENT_ID + "&client_secret=" + env.TWITCH_CLIENT_SECRET + "&grant_type=client_credentials" //sever-to-server, returns token
-  clientPath = "https://id.twitch.tv/oauth2/authorize?client_id=" + env.TWITCH_CLIENT_ID + "&redirect_uri=" + this.redirect + "&response_type=token&scope=[]"
+  TWITCH_ACCESS_TOKEN = sessionStorage.getItem('access_token')
 
   constructor(private store: Store<GenreState>, private genreService: GenreService, private http: HttpClient) {
-  
+
   }
 
   ngOnInit(): void {
-    if(!sessionStorage.getItem('access_token')){
-      this.createToken()
+    console.log(this.TWITCH_ACCESS_TOKEN)
+
+    if (!this.TWITCH_ACCESS_TOKEN) {
+      this.genreService.createToken()
     }
-  }
 
-createToken(){
-  this.http.post(this.s2sPath, null, {
-    headers:
-    {
-      'Content-Type': "application/json",
-    }
-  }).subscribe(res=>sessionStorage.setItem('access_token',res['access_token']))
-}
-
-getToken(){
-  return sessionStorage.getItem("access_token")
-}
-
-  getTopGames(){
-    this.http.get("https://api.twitch.tv/helix/games/top", {
-          headers:
-          {
-            'Content-Type': "application/json",
-            'Authorization': "Bearer " + this.getToken(),
-            'Client-ID': env.TWITCH_CLIENT_ID
-          }
+    this.genreService.getTopGames().subscribe(
+      res => {
+        res['data'].map(x => {
+          this.boxart.push(x.box_art_url)
         })
-          .subscribe(res => {
-            console.log(res)
-            this.boxart=res['box_art_url'];
-          })
+      }
+    );
+
   }
+
 
   // loadGenres() {
   //   this.genres$ = this.store.pipe(select(selectGenres))
