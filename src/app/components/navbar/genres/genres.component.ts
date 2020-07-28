@@ -20,7 +20,7 @@ import { pipe } from 'rxjs';
 export class GenresComponent implements OnInit {
 
   genres$: Observable<Genre[]>;
-  boxart: String[]
+  boxart: String[] = []
   TWITCH_ACCESS_TOKEN = sessionStorage.getItem('access_token')
 
   constructor(private store: Store<GenreState>, private genreService: GenreService, private http: HttpClient) {
@@ -36,8 +36,8 @@ export class GenresComponent implements OnInit {
 
     this.genreService.getTopGames().subscribe(
       res => {
-        res['data'].map(x => {
-          this.boxart.push(x.box_art_url)
+        res['data'].map(eachGame => {
+          this.boxart.push(eachGame.name)
         })
       }
     );
