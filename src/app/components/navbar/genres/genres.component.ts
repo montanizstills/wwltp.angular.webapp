@@ -37,7 +37,8 @@ export class GenresComponent implements OnInit {
     this.genreService.getTopGames().subscribe(
       res => {
         res['data'].map(eachGame => {
-          this.boxart.push(eachGame.name)
+          // this.boxart.push(eachGame.name)
+          this.store.dispatch(fromGenreActions.addGenre({genre:eachGame.name}))
         })
       }
     );
