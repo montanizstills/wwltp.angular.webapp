@@ -8,17 +8,17 @@ import { GenreService } from '../services/genre.service';
 @Injectable()
 export class GenreEffects {
 
-  loadGenres$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromGenreActions.loadGenres),
-      mergeMap(() =>
-        this.genreService.getGenres().pipe(
-          map(genres => fromGenreActions.loadGenresSuccess({ genres })),
-          catchError(error => of(fromGenreActions.loadGenresFailure({ error })))
-        )
-      )
-    )
-  );
+  // loadGenres$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(fromGenreActions.addGenre),
+  //     mergeMap(() =>
+  //       this.genreService.getTopGames().pipe(
+  //         map(genre => fromGenreActions.addGenreSuccess({ genre })),
+  //         catchError(error => of(fromGenreActions.addGenreFailure({ error })))
+  //       )
+  //     )
+  //   )
+  // );
 
   constructor(private actions$: Actions, private genreService: GenreService) { }
 

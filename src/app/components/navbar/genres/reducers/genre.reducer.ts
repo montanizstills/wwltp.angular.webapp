@@ -6,11 +6,11 @@ import { environment } from '../../../../../environments/environment';
 
 export const genreStateFeatureKey = 'genreState';
 
+export const adapter: EntityAdapter<Genre> = createEntityAdapter<Genre>();
+
 export interface GenreState extends EntityState<Genre> {
   error: any;
 }
-
-export const adapter: EntityAdapter<Genre> = createEntityAdapter<Genre>();
 
 export const initialState: GenreState = adapter.getInitialState({ error: undefined });
 
@@ -22,6 +22,7 @@ export const genreReducer = createReducer(
   on(GenreActions.addGenreFailure,
     (state, action) => {
       return {
+        ...state,
         error: action.error
       }
     }),
