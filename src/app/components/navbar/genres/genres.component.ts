@@ -10,6 +10,7 @@ import { GenreService } from './services/genre.service';
 import * as env from "ignore/env"
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { pipe } from 'rxjs';
+import { TwitchService } from 'src/app/app_services/twitch.service';
 
 @Component({
   selector: "genres",
@@ -19,27 +20,18 @@ import { pipe } from 'rxjs';
 
 export class GenresComponent implements OnInit {
 
-  genres$: Observable<Genre[]>;
-  boxart: String[] = []
-  TWITCH_ACCESS_TOKEN = sessionStorage.getItem('access_token')
+  genres=[]
 
-  constructor(private store: Store<GenreState>, private genreService: GenreService, private http: HttpClient) {
+  constructor(private store: Store<GenreState>, private genreService: GenreService, private http: HttpClient,private twitchService:TwitchService) {
 
   }
 
   ngOnInit(): void {
-    console.log(this.TWITCH_ACCESS_TOKEN)
-    
+    console.log(this.twitchService.TWITCH_ACCESS_TOKEN)    
 
-    if (!this.TWITCH_ACCESS_TOKEN) {
-      this.genreService.createToken()
-    }
-    
-
-    this.genreService.getTopGames().subscribe(
+    this.twitchService.getTopGames().subscribe(
       res => {
         res['data'].map(eachGame => {
-          // this.boxart.push(eachGame.name)
           this.store.dispatch(fromGenreActions.addGenre({genre:eachGame.name}))
         })
       }
