@@ -8,22 +8,9 @@ import * as env from '../../../../../ignore/env';
 export class MainPageService{
     constructor(private http:HttpClient, private genreService:GenreService){}
     
-    getVideos(){
-       return this.http.get("https://api.twitch.tv/helix/streams",{
-            headers: {
-                'Content-Type': "application/json",
-                'Authorization': "Bearer " + this.genreService.getToken(),
-                'Client-ID': env.TWITCH_CLIENT_ID
-            }
-        })
+    getLiveVideoURL(videoChannelCollection_id:string){
+        // "https://player.twitch.tv/?video="+videoChannelCollection_id+"&parent=localhost"
+        // this.http.get()
     }
-    getTags(){
-        return this.http.get("https://api.twitch.tv/helix/tags/streams",{
-            headers: {
-                'Content-Type': "application/json",
-                'Authorization': "Bearer " + this.genreService.getToken(),
-                'Client-ID': env.TWITCH_CLIENT_ID
-            }
-        })
-    }
+
 }

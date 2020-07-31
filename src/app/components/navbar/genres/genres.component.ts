@@ -29,10 +29,12 @@ export class GenresComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.TWITCH_ACCESS_TOKEN)
+    
 
     if (!this.TWITCH_ACCESS_TOKEN) {
       this.genreService.createToken()
     }
+    
 
     this.genreService.getTopGames().subscribe(
       res => {

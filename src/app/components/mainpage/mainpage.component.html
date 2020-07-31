@@ -1,3 +1,2 @@
-<div id="scrollingVideos">
-    <img *ngFor='let video of videos' src='{{video}}'/>
-</div>
+    <!-- display live video, embedded -->
+    <iframe *ngFor='let video of videos' src='{{video}}' height=500em width=500em frameborder=1 scrolling=no allowfullscreen=false></iframe>
