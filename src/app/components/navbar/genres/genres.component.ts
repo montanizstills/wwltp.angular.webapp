@@ -20,33 +20,48 @@ import { TwitchService } from 'src/app/app_services/twitch.service';
 
 export class GenresComponent implements OnInit {
 
-  genres=[]
+  genres = []
 
-  constructor(private store: Store<GenreState>, private genreService: GenreService, private http: HttpClient,private twitchService:TwitchService) {
+  constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService) {
 
   }
 
   ngOnInit(): void {
-    console.log(this.twitchService.TWITCH_ACCESS_TOKEN)    
+    console.log(this.twitchService.TWITCH_ACCESS_TOKEN)
 
-    this.twitchService.getTopGames().subscribe(
-      res => {
-        res['data'].map(eachGame => {
-          this.store.dispatch(fromGenreActions.addGenre({genre:eachGame.name}))
-        })
-      }
-    );
+    // this.twitchService.getTopGames().subscribe(
+    //   res => {
+    //     res['data'].map(eachGame => {
+    //       this.store.dispatch(fromGenreActions.addGenre({genre:eachGame.name}))
+    //     })
+    //   }
+    // );
 
+    // this.twitchService.getTags().subscribe(
+    //   res => {
+    //     res['data'].map(eachTag => {
+    //       console.log(eachTag)
+    //       if (eachTag['is_auto'] == true)
+    //         this.genres.push(eachTag['localization_names']['en-us'])
+    //     })
+    //   })
+
+    // this.twitchService.getCategories().subscribe(res=>{
+    //   console.log(res)
+    // })
+
+    // this.twitchService.getVideosByTag().subscribe(
+    //   res => {
+    //     console.log(res)
+    //   })
+
+  
   }
 
 
   // loadGenres() {
   //   this.genres$ = this.store.pipe(select(selectGenres))
   // }
-  // addGenre() {
-  //   this.store.dispatch(fromGenreActions.addGenre({ genre: { id: "test" } }))
-  // }
-
 
   // APICall, initialization
 }

@@ -7,10 +7,5 @@ import * as env from '../../../../../ignore/env';
 @Injectable({ providedIn: 'root' })
 export class MainPageService{
     constructor(private http:HttpClient, private genreService:GenreService){}
-    
-    getLiveVideoURL(videoChannelCollection_id:string){
-        // "https://player.twitch.tv/?video="+videoChannelCollection_id+"&parent=localhost"
-        // this.http.get()
-    }
 
 }

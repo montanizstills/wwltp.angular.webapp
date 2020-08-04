@@ -1,2 +1,2 @@
     <!-- display live video, embedded -->
-    <iframe *ngFor='let video of videos' src='{{video}}' height=500em width=500em frameborder=1 scrolling=no allowfullscreen=false></iframe>
+    <iframe *ngFor='let video of videos' [src]="video" height=300em width=300em frameborder=0 scrolling=no allowfullscreen=false></iframe>
