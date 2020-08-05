@@ -11,7 +11,7 @@ import * as env from "ignore/env"
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { pipe } from 'rxjs';
 import { TwitchService } from 'src/app/app_services/twitch.service';
-
+import {AuthService} from 'src/app/auth/auth.service'
 @Component({
   selector: "genres",
   templateUrl: "./genres.component.html",
@@ -22,7 +22,7 @@ export class GenresComponent implements OnInit {
 
   genres = []
 
-  constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService) {
+  constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService, private auth:AuthService) {
 
   }
 
