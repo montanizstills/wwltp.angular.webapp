@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^10.0.4",
     "@angular/platform-browser-dynamic": "^10.0.4",
     "@angular/router": "^10.0.4",
+    "@auth0/auth0-spa-js": "^1.11.0",
     "@ngrx/component": "github:ngrx/component-builds",
     "@ngrx/component-store": "^10.0.0-beta.0",
     "@ngrx/data": "^9.2.0",
