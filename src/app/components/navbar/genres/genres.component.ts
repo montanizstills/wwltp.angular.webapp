@@ -11,7 +11,7 @@ import * as env from "ignore/env"
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { pipe } from 'rxjs';
 import { TwitchService } from 'src/app/app_services/twitch.service';
-import {AuthService} from 'src/app/auth/auth.service'
+import { AuthService } from 'src/app/auth/auth.service'
 @Component({
   selector: "genres",
   templateUrl: "./genres.component.html",
@@ -20,14 +20,33 @@ import {AuthService} from 'src/app/auth/auth.service'
 
 export class GenresComponent implements OnInit {
 
+  // this.genres$ = this.store.pipe(select(selectGenres))
   genres = []
 
-  constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService, private auth:AuthService) {
+  constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService, private auth: AuthService) {
 
   }
 
+  login() {
+    return this.auth.login()
+  }
+
+  isLoggedIn() {
+    return this.auth.loggedIn
+  }
+
+  logout() {
+    return this.auth.logout();
+  }
+
+  getUserProfile() {
+      return this.auth.userProfile$    
+  }
+
+
   ngOnInit(): void {
-    console.log(this.twitchService.TWITCH_ACCESS_TOKEN)
+
+    // this.auth.getManagementAPIAccessToken()
 
     // this.twitchService.getTopGames().subscribe(
     //   res => {
@@ -37,31 +56,6 @@ export class GenresComponent implements OnInit {
     //   }
     // );
 
-    // this.twitchService.getTags().subscribe(
-    //   res => {
-    //     res['data'].map(eachTag => {
-    //       console.log(eachTag)
-    //       if (eachTag['is_auto'] == true)
-    //         this.genres.push(eachTag['localization_names']['en-us'])
-    //     })
-    //   })
-
-    // this.twitchService.getCategories().subscribe(res=>{
-    //   console.log(res)
-    // })
-
-    // this.twitchService.getVideosByTag().subscribe(
-    //   res => {
-    //     console.log(res)
-    //   })
-
-  
   }
 
-
-  // loadGenres() {
-  //   this.genres$ = this.store.pipe(select(selectGenres))
-  // }
-
-  // APICall, initialization
 }

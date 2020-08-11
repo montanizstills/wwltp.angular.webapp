@@ -1,6 +1,7 @@
 <div class=".container-fluid" id="dropdown">
-  <button (click)="auth.login()" *ngIf="!auth.loggedIn">Log In</button>
-  <button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
+  <button (click)="login()" *ngIf='!isLoggedIn()' >Log In</button>
+  <button (click)="logout()" *ngIf="isLoggedIn()">Log Out</button>
+  <p *ngIf="isLoggedIn()">{{getUserProfile() | async | json}}</p>
   <li *ngFor='let genre of genres'>
     {{genre}}
   </li>

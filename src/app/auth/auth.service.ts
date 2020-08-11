@@ -5,15 +5,18 @@ import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as env from "../../../ignore/env"
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   // Create an observable of Auth0 instance of client
   auth0Client$ = (from(
     createAuth0Client({
       domain: "wwltp.auth0.com",
-      client_id: env.AUTH0_CLIENT_ID ,
+      client_id: env.AUTH0_CLIENT_ID,
       redirect_uri: `${window.location.origin}`
     })
   ) as Observable<Auth0Client>).pipe(
@@ -37,7 +40,7 @@ export class AuthService {
   // Create a local property for login status
   loggedIn: boolean = null;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     // On initial load, check authentication state with authorization server
     // Set up local auth streams if user is already authenticated
     this.localAuthSetup();
@@ -81,6 +84,7 @@ export class AuthService {
         redirect_uri: `${window.location.origin}`,
         appState: { target: redirectPath }
       });
+      
     });
   }
 
@@ -122,5 +126,29 @@ export class AuthService {
       });
     });
   }
+
+  //Auth0 API Management Class -- migrate from client to server
+
+  getManagementAPIAccessToken() {
+    this.auth0Client$.subscribe(
+      (client: Auth0Client) => {
+      
+        // client.checkSession(
+      //   {
+      //     audience: `https://wwltp.auth0.com/api/v2/`,
+      //     scope: 'read:current_user'
+      //   }
+      // ),
+      
+      from(client.getIdTokenClaims()).subscribe(idToken => {
+        console.log(idToken.__raw)
+      })
+
+    })
+
+  }//End getManagementAPI()
+
+
+
 
 }

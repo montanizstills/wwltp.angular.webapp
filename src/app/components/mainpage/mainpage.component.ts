@@ -21,7 +21,8 @@ export class MainpageComponent implements OnInit {
     //for videoID in catagories: <iframe/> embedded videos
     this.videos.push(this.domSanitizer.bypassSecurityTrustResourceUrl(this.twitchService.getLiveVideoURL("4d1eaa36-f750-4862-b7e9-d0a13970d535")))
 
-    console.log(this.facebookService.getFromURL())
+    // console.log(this.facebookService.getFromURL())
+  
   }
 
 }
