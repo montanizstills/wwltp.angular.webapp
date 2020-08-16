@@ -8,10 +8,11 @@ export class FacebookService {
     constructor(private http: HttpClient) {
     }
 
-    getFromURL() {
-        this.http.get("https://graph.facebook.com/v8.0/?id=https://www.facebook.com?fields=og_object", {
+    getFromURL(token) {
+        this.http.get("https://graph.facebook.com/544569746165737/accounts?access_token="+token, {
             headers: {
-                'Access_Control_Origin': '*'
+                'Access_Control_Origin': '*',
+                'Content_Type':"application/x-www-form-urlencoded/"
             },
         }).subscribe(res => {
             console.log(res)  

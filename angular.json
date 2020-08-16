@@ -66,6 +66,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "sslKey": "../../localhost-key.pem",
+            "sslCert": "../../localhost.pem",
             "browserTarget": "angular-webapp:build"
           },
           "configurations": {

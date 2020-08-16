@@ -12,12 +12,15 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class AuthService {
+
   // Create an observable of Auth0 instance of client
   auth0Client$ = (from(
     createAuth0Client({
       domain: "wwltp.auth0.com",
       client_id: env.AUTH0_CLIENT_ID,
-      redirect_uri: `${window.location.origin}`
+      redirect_uri: `${window.location.origin}`,
+      useRefreshTokens: true,
+      scope: "read:current_user read:user_idp_tokens",
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -84,7 +87,7 @@ export class AuthService {
         redirect_uri: `${window.location.origin}`,
         appState: { target: redirectPath }
       });
-      
+
     });
   }
 
@@ -129,24 +132,43 @@ export class AuthService {
 
   //Auth0 API Management Class -- migrate from client to server
 
-  getManagementAPIAccessToken() {
+  getRawToken() {
     this.auth0Client$.subscribe(
       (client: Auth0Client) => {
-      
-        // client.checkSession(
-      //   {
-      //     audience: `https://wwltp.auth0.com/api/v2/`,
-      //     scope: 'read:current_user'
-      //   }
-      // ),
-      
-      from(client.getIdTokenClaims()).subscribe(idToken => {
-        console.log(idToken.__raw)
+
+        // Management API:   
+        // Provides access to read, update, and delete user profiles stored in the Auth0 database. 
+
+
+        //getTokenSilently() returns access token
+        //getIdTokenClaims()._raw returns an id token
+
+        let id
+        this.userProfile$.subscribe(res => {
+          id = res['sub']
+          console.log(id)
+        })
+
+        let token
+        client.getTokenSilently().then(res => {
+          token = res
+          console.log(token)
+          this.http.get("https://login.auth0.com/api/v2/users/" + id, {
+            headers: {
+              "Authorization": "Bearer " + token
+            }
+          }).subscribe(res => {
+            console.log("HTTP call" + res)
+          })
+        })
+
+
+
+
       })
 
-    })
+  }//End getRawToken()
 
-  }//End getManagementAPI()
 
 
 
