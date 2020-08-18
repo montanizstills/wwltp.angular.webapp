@@ -1,3 +1,6 @@
+declare var require: any
+declare var System: any
+
 import { Injectable } from '@angular/core';
 import createAuth0Client from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
@@ -6,6 +9,7 @@ import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as env from "../../../ignore/env"
 import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +23,7 @@ export class AuthService {
       domain: "wwltp.auth0.com",
       client_id: env.AUTH0_CLIENT_ID,
       redirect_uri: `${window.location.origin}`,
-      useRefreshTokens: true,
-      scope: "read:current_user read:user_idp_tokens",
+      useRefreshTokens: true
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -130,7 +133,11 @@ export class AuthService {
     });
   }
 
-  //Auth0 API Management Class -- migrate from client to server
+  //------------  Auth0 API Management Class ---------------------
+  // TODO: migrate from client to server
+
+  id = null;
+  authClientToken = null
 
   getRawToken() {
     this.auth0Client$.subscribe(
@@ -139,31 +146,24 @@ export class AuthService {
         // Management API:   
         // Provides access to read, update, and delete user profiles stored in the Auth0 database. 
 
+        // try checksession with scopes using SPA
+        // try also adding a facebook audience if checksession doesnt work.
 
-        //getTokenSilently() returns access token
+
+        //getTokenSilently() returns access token 
         //getIdTokenClaims()._raw returns an id token
 
-        let id
+
         this.userProfile$.subscribe(res => {
-          id = res['sub']
-          console.log(id)
+          this.id = res['sub']
+          console.log(this.id)
         })
 
-        let token
+
         client.getTokenSilently().then(res => {
-          token = res
-          console.log(token)
-          this.http.get("https://login.auth0.com/api/v2/users/" + id, {
-            headers: {
-              "Authorization": "Bearer " + token
-            }
-          }).subscribe(res => {
-            console.log("HTTP call" + res)
-          })
+          this.authClientToken = res
+          console.log(this.authClientToken)
         })
-
-
-
 
       })
 
@@ -171,6 +171,26 @@ export class AuthService {
 
 
 
+  getManagementAPIToken() {
+    require.ensure('../../../node_modules/auth0', require => {
+      
+      let mc = require('../../../node_modules/auth0')
+     
+      var management = new mc.ManagementClient({
+        token: this.authClientToken,
+        domain: "wwltp.auth0.com",
+        // clientId: env.AUTH0_CLIENT_ID,
+        // clientSecret: env.AUTH0_CLIENT_SECRET,
+        scope: "read:users read:user_idp_tokens",
+        // responseType: "token"
+      })
 
+      management.getUser(this.id, res => {
+        console.log("management api says: " + res)
+      })
+
+    })//end require.ensure()
+
+  }
 
 }
