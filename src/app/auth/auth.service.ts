@@ -9,6 +9,7 @@ import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as env from "../../../ignore/env"
 import { HttpClient } from '@angular/common/http';
+import { Loader } from 'es-module-loader/core/loader-polyfill.js'
 
 
 @Injectable({
@@ -146,10 +147,13 @@ export class AuthService {
         // Management API:   
         // Provides access to read, update, and delete user profiles stored in the Auth0 database. 
 
-        // try checksession with scopes using SPA
-        // try also adding a facebook audience if checksession doesnt work.
 
+        //1. try checksession with scopes using SPA and /api/v2/
+        // try a facebook audience too if checksession doesnt work.
 
+        //2. try decoding and encoding jwt. "jwt.d.ts"
+
+        //are these returned encoded, decoded, jwt, or what?
         //getTokenSilently() returns access token 
         //getIdTokenClaims()._raw returns an id token
 
@@ -172,25 +176,51 @@ export class AuthService {
 
 
   getManagementAPIToken() {
-    require.ensure('../../../node_modules/auth0', require => {
-      
-      let mc = require('../../../node_modules/auth0')
-     
-      var management = new mc.ManagementClient({
-        token: this.authClientToken,
-        domain: "wwltp.auth0.com",
-        // clientId: env.AUTH0_CLIENT_ID,
-        // clientSecret: env.AUTH0_CLIENT_SECRET,
-        scope: "read:users read:user_idp_tokens",
-        // responseType: "token"
-      })
+    this.useLoader()
+  }
 
-      management.getUser(this.id, res => {
-        console.log("management api says: " + res)
-      })
-
-    })//end require.ensure()
+  useLoader() {
+    let loader = new Loader()
+    var mc = loader.import('auth0').ManagementClient
+    let mgmtclient = new mc.ManagementClient({
+      domain: "wwltp.auth0.com",
+      scope: "read:users read:user_idp_tokens"
+    })
+    mgmtclient.getUser(this.id,res=>{
+      console.log("mgmtClient says "+res)
+    })
 
   }
+
+  // useRequire(){
+  //   const management = require('auth0').ManagementClient
+  //   var mgmtclient = new management.ManagementClient();
+  // }
+
+  // useRequireEnsure() {
+  //   require.ensure('../../../node_modules/auth0', require => {
+
+  //     let mc = require('../../../node_modules/auth0')
+  //     var management = new mc.ManagementClient({
+  //       token: this.authClientToken,
+  //       domain: "wwltp.auth0.com",
+  //       // clientId: env.AUTH0_CLIENT_ID,
+  //       // clientSecret: env.AUTH0_CLIENT_SECRET,
+  //       scope: "read:users read:user_idp_tokens",
+  // audience:"https://wwltp.auth0.com/api/v2/",
+  //       // responseType: "token"
+  //     })
+  //     management.getUser(this.id, res => {
+  //       console.log("management api says: " + res)
+  //     })
+
+  //   })
+  // }
+
+  // useSysImport() {
+  //   System.import("auth0").then(auth0js => {
+  //     var management = new auth0js.ManagementClient()
+  //   })
+  // }
 
 }
