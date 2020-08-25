@@ -11,6 +11,8 @@ import { HttpClient } from '@angular/common/http';
 import { TwitchService } from 'src/app/app_services/twitch.service';
 import { AuthService } from 'src/app/auth/auth.service'
 import { FacebookService } from 'src/app/app_services/facebook.service';
+import {YoutubeService} from 'src/app/app_services/youtube.service'
+
 @Component({
   selector: "genres",
   templateUrl: "./genres.component.html",
@@ -22,7 +24,7 @@ export class GenresComponent implements OnInit {
   // this.genres$ = this.store.pipe(select(selectGenres))
   genres = []
 
-  constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService, private auth: AuthService, private facebookService:FacebookService) {
+  constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService, private auth: AuthService, private facebookService: FacebookService, private youtubeService: YoutubeService) {
 
   }
 
@@ -39,22 +41,17 @@ export class GenresComponent implements OnInit {
   }
 
   getUserProfile() {
-      return this.auth.userProfile$   
+    return this.auth.userProfile$
   }
 
-  getAuth0Client(){
-    return this.auth.auth0Client$
+  async hitFacebookAPI() {
+    // let token = await this.auth.getRawToken()
+    let token = await this.facebookService.getFromURL()
+    // this.http.get("https://graph.facebook.com/588510401771671/?access_token="+token).subscribe(res=>console.log(res))
   }
 
-  printProfile(){
-    sessionStorage.clear()
-    this.auth.getRawToken()
-    // from(res.getIdTokenClaims()).subscribe()
-    
-  }
-
-  hitFacebookAPI(){
-    this.facebookService.getFromURL(sessionStorage.getItem("auth_token"))
+  async hitYoutubeAPI(){
+    await this.youtubeService.getYoutubeCategoryIds();
   }
 
 

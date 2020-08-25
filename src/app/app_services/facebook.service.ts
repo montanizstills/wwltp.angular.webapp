@@ -8,14 +8,22 @@ export class FacebookService {
     constructor(private http: HttpClient) {
     }
 
-    getFromURL(token) {
-        this.http.get("https://graph.facebook.com/544569746165737/accounts?access_token="+token, {
+    async getFromURL() {
+        var token
+        await this.http.get("http://localhost:8080/server/myfacebookapi", {
             headers: {
                 'Access_Control_Origin': '*',
-                'Content_Type':"application/x-www-form-urlencoded/"
+                'Content_Type': "application/json"
             },
-        }).subscribe(res => {
-            console.log(res)  
+        }).toPromise().then(res => {
+            res.forEach(element => {
+                let obj = element['identities']
+                obj.forEach(element => {
+                    if (element['provider'] == 'facebook')
+                        token = element['access_token']
+                });
+            });
         })
+        return token
     }
 }
