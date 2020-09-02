@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core'
 @Injectable({ providedIn: 'root' })
 
 export class TwitchService {
-    TWITCH_ACCESS_TOKEN = sessionStorage.getItem('access_token')
+    TWITCH_ACCESS_TOKEN = sessionStorage.getItem('twitch_access_token')
 
     constructor(private http: HttpClient) {
         if (!this.TWITCH_ACCESS_TOKEN) {
@@ -27,11 +27,11 @@ export class TwitchService {
                 'Content-Type': "application/json"
             }
         })
-            .subscribe(res => sessionStorage.setItem('access_token', res['access_token']))
+            .subscribe(res => sessionStorage.setItem('twitch_access_token', res['access_token']))
     }
 
     getToken() {
-        return sessionStorage.getItem("access_token")
+        return sessionStorage.getItem("twitch_access_token")
     }
 
 

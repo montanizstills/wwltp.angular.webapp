@@ -21,7 +21,9 @@ export class AuthService {
       domain: "wwltp.auth0.com",
       client_id: env.AUTH0_CLIENT_ID,
       redirect_uri: `${window.location.origin}`,
-      useRefreshTokens: true
+      useRefreshTokens: true,
+      prompt:"login",
+      // display:"popup"
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -153,20 +155,21 @@ export class AuthService {
     return auth0Client
   }
 
-  async getRawToken() {
-    var authClientToken;
-    await this.getAuthClient()
-      .checkSession({
-        scope: "read:users read:user_idp_tokens",
-        audience: "https://wwltp.auth0.com/api/v2/"
-      }).then(() => this.getAuthClient()
-        .getTokenSilently()
-        .then(token => {
-          authClientToken = token;
-        })
-      )
-    return authClientToken
-  }//End getRawToken()
+  async getAuth0Identities() {
+    await this.http.get("http://localhost:8080/server/auth0Identity", {
+      headers: {
+        'Access_Control_Origin': '*',
+        'Content_Type': "application/json"
+      },
+    }).toPromise().then(res => {
+      res.forEach(element => {
+        element['identities'].forEach(element => {
+          sessionStorage.setItem(element['provider'], element['access_token'])
+          console.log(sessionStorage.getItem[element['provider']])
+        });
+      });
+    })
+  }
 
 
 }  
