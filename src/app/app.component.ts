@@ -14,29 +14,6 @@ export class AppComponent {
     private linkservice: DependencyInjectionService,
   ) { }
 
-  // fbLibrary() {
-
-  //   (window as any).fbAsyncInit = function () {
-  //     console.log(window['FB'])
-  //     window['FB'].init({
-  //       appId: env.FACEBOOK_APP_ID,
-  //       cookie: true,
-  //       xfbml: true,
-  //       version: 'v3.1'
-  //     });
-  //     window['FB'].AppEvents.logPageView();
-  //   };
-
-  //   (function (d, s, id) {
-  //     var js, fjs = d.getElementsByTagName(s)[0];
-  //     if (d.getElementById(id)) { return; }
-  //     js = d.createElement(s); js.id = id;
-  //     js.src = "https://connect.facebook.net/en_US/sdk.js";
-  //     fjs.parentNode.insertBefore(js, fjs);
-  //   }(document, 'script', 'facebook-jssdk'));
-
-  // }
-
   ngOnInit() {
 
     // Add all dependencies via AppComponent
@@ -49,33 +26,6 @@ export class AppComponent {
         "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",
     });
 
-
-    // (window as any).fbAsyncInit = function () {
-    //   window['FB'].init({
-    //     appId: env.FACEBOOK_APP_ID,
-    //     cookie: true,
-    //     xfbml: true,
-    //     version: 'v3.1'
-    //   });
-    //   window['FB'].AppEvents.logPageView();
-    //   window['FB'].api(
-    //     "?id=https://www.facebook.com",
-    //     {
-    //       "fields": "engagement"
-    //     },
-    //     (response) => {
-    //       console.log(response)
-    //     }
-    //   )
-    // };
-
-    // (function (d, s, id) {
-    //   var js, fjs = d.getElementsByTagName(s)[0];
-    //   if (d.getElementById(id)) { return; }
-    //   js = d.createElement(s); js.id = id;
-    //   js.src = "https://connect.facebook.net/en_US/sdk.js";
-    //   fjs.parentNode.insertBefore(js, fjs);
-    // }(document, 'script', 'facebook-jssdk'));
 
     
 

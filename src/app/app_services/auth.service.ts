@@ -1,9 +1,8 @@
-declare function require(name: String): any
 import { Injectable } from '@angular/core';
 import createAuth0Client from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
-import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
-import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
+import { from, of, Observable, BehaviorSubject, combineLatest, throwError, pipe } from 'rxjs';
+import { tap, catchError, concatMap, shareReplay, toArray } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as env from "../../../ignore/env"
 import { HttpClient } from '@angular/common/http';
@@ -22,8 +21,7 @@ export class AuthService {
       client_id: env.AUTH0_CLIENT_ID,
       redirect_uri: `${window.location.origin}`,
       useRefreshTokens: true,
-      prompt:"login",
-      // display:"popup"
+      prompt: "login"
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -134,18 +132,9 @@ export class AuthService {
   }
 
   //------------  Auth0 API Management Class --------------------- 
-  // Provides access to read, update, and delete user profiles stored in the Auth0 database. TODO: migrate from client to server
+  // CRUD for User profiles stored in the Auth0 database. TODO: migrate from client to server
   // getTokenSilently() returns access token 
   // getIdTokenClaims()._raw returns an id token
-
-  id = null;
-
-  setUserProfile() {
-    this.userProfile$.subscribe(res => {
-      this.id = res['sub']
-      console.log(this.id)
-    })
-  }
 
   getAuthClient() {
     let auth0Client: Auth0Client = null;
@@ -155,21 +144,24 @@ export class AuthService {
     return auth0Client
   }
 
-  async getAuth0Identities() {
-    await this.http.get("http://localhost:8080/server/auth0Identity", {
+  getAuth0Identities() {
+    this.http.get("http://localhost:8080/server/auth0Identity", {
       headers: {
         'Access_Control_Origin': '*',
         'Content_Type': "application/json"
       },
-    }).toPromise().then(res => {
-      res.forEach(element => {
-        element['identities'].forEach(element => {
-          sessionStorage.setItem(element['provider'], element['access_token'])
-          console.log(sessionStorage.getItem[element['provider']])
-        });
-      });
-    })
+    }).toPromise().then(
+      (idpArray: Array<Object>) => {
+        console.log(idpArray)
+        idpArray.forEach((individualIDPResponse) => {
+          individualIDPResponse = individualIDPResponse['identities'][0]
+          sessionStorage.setItem(individualIDPResponse['connection'], individualIDPResponse["access_token"])
+        })
+      })
   }
 
 
-}  
+}
+
+
+ 

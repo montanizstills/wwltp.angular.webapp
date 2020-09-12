@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/app_services/auth.service'
 import { FacebookService } from 'src/app/app_services/facebook.service';
 import { YoutubeService } from 'src/app/app_services/youtube.service'
 
+
 @Component({
   selector: "genres",
   templateUrl: "./genres.component.html",
@@ -44,22 +45,20 @@ export class GenresComponent implements OnInit {
     return this.auth.userProfile$
   }
 
-  async storeIdentityTokensInSessionStorage() {
-    await this.authService.getAuth0Identities()
+  storeIdentityTokensInSessionStorage() {
+    this.authService.getAuth0Identities()
   }
 
-  async hitFacebookAPI() {
+  hitFacebookAPI() {
     let token = sessionStorage.getItem('facebook')
-    this.http.get("https://graph.facebook.com/111250593830954/feed?access_token="+token).subscribe(res=>console.log(res))
+    this.http.get("https://graph.facebook.com/me?access_token=" + token).subscribe(res => console.log(res))
   }
 
-  async hitYoutubeAPI() {
-    await this.youtubeService.getYoutubeCategoryIds();
+  hitYoutubeAPI() {
+    this.youtubeService.callYoutubeEndpoint()
   }
-
 
   ngOnInit(): void {
-
     // this.twitchService.getTopGames().subscribe(
     //   res => {
     //     res['data'].map(eachGame => {
