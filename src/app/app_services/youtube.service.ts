@@ -11,7 +11,7 @@ export class YoutubeService {
     callYoutubeEndpoint = () => {
         this.http.get("https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=us&key=" + env.YOUTUBE_API_KEY, {
             headers: {
-                "Authorization": "Bearer " + sessionStorage.getItem["googleAccessToken"],
+                "Authorization": "Bearer " + sessionStorage.getItem["google-oauth2"],
                 "Accept": "application/json"
             }
         }).subscribe(res => console.log(res))

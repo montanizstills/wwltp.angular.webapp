@@ -6,12 +6,11 @@ import { GenreState } from './reducers/genre.reducer'
 import * as fromGenreActions from './actions/genre.actions'
 import { Genre } from './models/genre.model'
 import { GenreService } from './services/genre.service';
-import * as env from "ignore/env"
 import { HttpClient } from '@angular/common/http';
-import { TwitchService } from 'src/app/app_services/twitch.service';
-import { AuthService } from 'src/app/app_services/auth.service'
-import { FacebookService } from 'src/app/app_services/facebook.service';
-import { YoutubeService } from 'src/app/app_services/youtube.service'
+import { TwitchService } from '../../../../../src/app/app_services/twitch.service';
+import { AuthService } from '../../../../../src/app/app_services/auth.service'
+import { FacebookService } from '../../../../../src/app/app_services/facebook.service';
+import { YoutubeService } from '../../../../../src/app/app_services/youtube.service'
 
 
 @Component({
@@ -25,7 +24,7 @@ export class GenresComponent implements OnInit {
   // this.genres$ = this.store.pipe(select(selectGenres))
   genres = []
 
-  constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService, private auth: AuthService, private facebookService: FacebookService, private youtubeService: YoutubeService, private authService: AuthService) {
+  constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService, private auth: AuthService, private facebookService: FacebookService, private youtubeService: YoutubeService) {
 
   }
 
@@ -46,7 +45,7 @@ export class GenresComponent implements OnInit {
   }
 
   storeIdentityTokensInSessionStorage() {
-    this.authService.getAuth0Identities()
+    this.auth.getAuth0Identities()
   }
 
   hitFacebookAPI() {

@@ -10,9 +10,11 @@
     {
       "path": "./tsconfig.app.json"
     },
-    {
-      "path": "./tsconfig.spec.json"
-    }
   ],
-  "experimentalDecorators":true
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators":true,
+    // "esModuleInterop": true,
+    
+  }
 }

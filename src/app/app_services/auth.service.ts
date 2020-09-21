@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import createAuth0Client from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import { from, of, Observable, BehaviorSubject, combineLatest, throwError, pipe } from 'rxjs';
-import { tap, catchError, concatMap, shareReplay, toArray } from 'rxjs/operators';
+import { tap, catchError, concatMap, shareReplay, map, mapTo } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as env from "../../../ignore/env"
 import { HttpClient } from '@angular/common/http';
+
 
 
 @Injectable({
@@ -19,8 +20,29 @@ export class AuthService {
     createAuth0Client({
       domain: "wwltp.auth0.com",
       client_id: env.AUTH0_CLIENT_ID,
-      redirect_uri: `${window.location.origin}`,
-      useRefreshTokens: true,
+
+      // redirect_uri: `${window.location.origin}`,
+      // redirect_uri: "https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&include_granted_scopes=true&redirect_uri=https%3A%2F%2Flocalhost%3A4200&response_type=token&client_id="+env.GOOGLE_CLIENT_ID,
+      
+      // access_type: "offline",
+
+      // permission to return identity provider tokens from ManagementAPI service
+      // scope:"read:user_ip_tokens",
+
+      // scopes supplied to the IDP on authorization
+      // connection_scope:
+      //   "https://www.googleapis.com/auth/youtube " +
+      //   "https://www.googleapis.com/auth/youtube.channel-memberships.creator " +
+      //   "https://www.googleapis.com/auth/youtube.force-ssl " +
+      //   "https://www.googleapis.com/auth/youtube.upload " +
+      //   "https://www.googleapis.com/auth/youtubepartner " +
+      //   "https://www.googleapis.com/auth/youtubepartner-channel-audit " +
+      //   "https://www.googleapis.com/auth/youtube.readonly",
+
+      // scope: "",
+
+      // useRefreshTokens: true,
+
       prompt: "login"
     })
   ) as Observable<Auth0Client>).pipe(
@@ -85,6 +107,7 @@ export class AuthService {
     this.auth0Client$.subscribe((client: Auth0Client) => {
       // Call method to log in
       client.loginWithRedirect({
+        // fragment:"v2/",
         redirect_uri: `${window.location.origin}`,
         appState: { target: redirectPath }
       });
@@ -150,18 +173,18 @@ export class AuthService {
         'Access_Control_Origin': '*',
         'Content_Type': "application/json"
       },
-    }).toPromise().then(
+    }).subscribe(
       (idpArray: Array<Object>) => {
         console.log(idpArray)
         idpArray.forEach((individualIDPResponse) => {
           individualIDPResponse = individualIDPResponse['identities'][0]
+          sessionStorage.removeItem(individualIDPResponse['connection'])
           sessionStorage.setItem(individualIDPResponse['connection'], individualIDPResponse["access_token"])
         })
       })
   }
 
-
 }
 
 
- 
+
