@@ -27,7 +27,7 @@ export class AppComponent {
     });
 
 
-    
+
 
   }//End OnInit()
 
@@ -49,8 +49,10 @@ export class AppComponent {
   //make TwitchAPI call to get game titles.
   //make seperate SubGenres component, game titles will fall under Subgenres component
 
-  // Initialize MainPage
 
+  // Initialize MainPage
+  //make YoutubeAPI calls to add content to live videos 
+  
   // Initialize Footer
-  // Set CommunityCenter chatbox left,
+  // Set CommunityCenter chatbox left, Set News,Ranking on right
 }
