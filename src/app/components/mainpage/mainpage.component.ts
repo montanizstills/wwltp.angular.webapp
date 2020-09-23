@@ -4,9 +4,7 @@ import { GenresComponent } from '../navbar/genres/genres.component'
 import { TwitchService } from 'src/app/app_services/twitch.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
-import * as env from '../../../../ignore/env'
 import { FacebookService } from '../../app_services/facebook.service'
-import { DependencyInjectionService } from 'src/app/dependencyinjection.service';
 import {  NewsService } from 'src/app/app_services/news.service'
 @Component({
   selector: 'mainpage',
@@ -25,5 +23,5 @@ export class MainpageComponent implements OnInit {
   }
 
   EsportsOneFeed = this.facebookService.getPageFeed("EsportsOne");
-  newsVar = new NewsService()
+  News = this.news.getNewsFromServer("https://www.reddit.com/r/esports/.rss")
 }
