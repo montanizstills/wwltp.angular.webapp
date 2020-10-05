@@ -1,4 +1,6 @@
 
+ignore/**
+
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,visualstudio,visualstudiocode,notepadpp,jupyternotebooks,jupyternotebook,macos,linux,windows,intellij+iml,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,visualstudio,visualstudiocode,notepadpp,jupyternotebooks,jupyternotebook,macos,linux,windows,intellij+iml,intellij+all
 
