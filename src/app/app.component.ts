@@ -2,6 +2,9 @@ import { Component } from "@angular/core";
 import { DependencyInjectionService } from "./dependencyinjection.service";
 import { Genre } from "./components/navbar/genres/models/genre.model";
 import * as env from '../../ignore/env'
+import { AuthService } from './app_services/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { YoutubeService } from './app_services/youtube.service';
 
 @Component({
   selector: "app-root",
@@ -12,6 +15,9 @@ export class AppComponent {
 
   constructor(
     private linkservice: DependencyInjectionService,
+    private auth: AuthService,
+    private http:HttpClient,
+    private youtubeService:YoutubeService
   ) { }
 
   ngOnInit() {
@@ -30,6 +36,35 @@ export class AppComponent {
 
 
   }//End OnInit()
+
+  login() {
+    return this.auth.login()
+  }
+
+  isLoggedIn() {
+    return this.auth.loggedIn
+  }
+
+  logout() {
+    return this.auth.logout();
+  }
+
+  getUserProfile() {
+    return this.auth.userProfile$
+  }
+
+  storeIdentityTokensInSessionStorage() {
+    this.auth.getAuth0Identities()
+  }
+
+  hitFacebookAPI() {
+    let token = sessionStorage.getItem('facebook')
+    this.http.get("https://graph.facebook.com/me?access_token=" + token).subscribe(res => console.log(res))
+  }
+
+  hitYoutubeAPI() {
+    this.youtubeService.callYoutubeEndpoint()
+  }
 
   // loadMovies$ = createEffect(() =>
   //   this.actions$.pipe(

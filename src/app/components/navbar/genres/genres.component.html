@@ -1,12 +1,5 @@
-<div class=".container-fluid" id="dropdown">
-  <button (click)="login()" *ngIf='!isLoggedIn()'>Log In</button>
-  <button (click)="logout()" *ngIf="isLoggedIn()">Log Out</button>
-  <p *ngIf="isLoggedIn()">{{getUserProfile() | async | json}}</p>
-  <li *ngFor='let genre of genres'>
-    {{genre}}
-  </li>
-  <button (click)="storeIdentityTokensInSessionStorage()">storeAccessTokensSessionStorage</button>
-  <button (click)="hitFacebookAPI()">Hit Facebook API</button>
-  <button (click)="hitYoutubeAPI()">Hit Youtube Endpoint</button>
-</div>
-
+<p>{{genreInput.id}}</p>
+<p>{{genreInput.title}}</p>
+<p>{{genreInput.src}}</p>
+<p>{{genreInput.article}}</p>
+<p>{{genreInput.date}}</p>

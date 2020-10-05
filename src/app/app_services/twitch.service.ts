@@ -8,9 +8,9 @@ export class TwitchService {
     TWITCH_ACCESS_TOKEN = sessionStorage.getItem('twitch_access_token')
 
     constructor(private http: HttpClient) {
-        if (!this.TWITCH_ACCESS_TOKEN) {
-            this.createToken()
-        }
+        // if (!this.TWITCH_ACCESS_TOKEN) {
+        //     this.createToken()
+        // }
     }
 
     //redirect -- for client 
@@ -21,7 +21,7 @@ export class TwitchService {
     clientPath = "https://id.twitch.tv/oauth2/authorize?client_id=" + env.TWITCH_CLIENT_ID + "&redirect_uri=" + this.redirect_uri + "&response_type=token&scope=[]"
 
     createToken() {
-        this.http.post(this.s2sPath, {}, {
+        this.http.post(this.clientPath, {}, {
             headers:
             {
                 'Content-Type': "application/json"

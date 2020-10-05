@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.YoutubeService = void 0;
 var core_1 = require("@angular/core");
-var env = require("../../../ignore/env");
+var env = require("../../");
 var YoutubeService = /** @class */ (function () {
     function YoutubeService(http, router) {
         var _this = this;

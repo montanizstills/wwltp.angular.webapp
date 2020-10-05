@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Store, select } from "@ngrx/store";
 import { selectGenres } from './selectors/genre.selector';
@@ -23,39 +23,14 @@ export class GenresComponent implements OnInit {
 
   // this.genres$ = this.store.pipe(select(selectGenres))
   genres = []
+  @Input() genreInput
+  @Output() delete = new EventEmitter()
 
   constructor(private store: Store<GenreState>, private http: HttpClient, private twitchService: TwitchService, private auth: AuthService, private facebookService: FacebookService, private youtubeService: YoutubeService) {
 
   }
 
-  login() {
-    return this.auth.login()
-  }
-
-  isLoggedIn() {
-    return this.auth.loggedIn
-  }
-
-  logout() {
-    return this.auth.logout();
-  }
-
-  getUserProfile() {
-    return this.auth.userProfile$
-  }
-
-  storeIdentityTokensInSessionStorage() {
-    this.auth.getAuth0Identities()
-  }
-
-  hitFacebookAPI() {
-    let token = sessionStorage.getItem('facebook')
-    this.http.get("https://graph.facebook.com/me?access_token=" + token).subscribe(res => console.log(res))
-  }
-
-  hitYoutubeAPI() {
-    this.youtubeService.callYoutubeEndpoint()
-  }
+  
 
   ngOnInit(): void {
     // this.twitchService.getTopGames().subscribe(

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,14 @@ export class NewsService {
 
   }
 
-  getNewsFromServer = async (address) => {
-    this.http.post("https://localhost:8080/server/news",address, {})
+  getNewsFromServer = (address) => {
+    this.http.post("http://localhost:8080/server/news", address, {
+      headers:
+      {
+        'Content-Type': "application/json"
+      }
+    })
       .subscribe(resp => { console.log(resp) })
   }
+
 }

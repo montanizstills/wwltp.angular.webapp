@@ -14,7 +14,20 @@
         <li class="nav-item explorer-li">HOME</li>
         <!-- work on passing genres as prop into element  -->
         <!-- <genres prop=Genre[]></genres> -->
-        <genres class="nav-item explorer-li"></genres>
+        
+        <div class=".container-fluid" id="dropdown">
+          <button (click)="login()" *ngIf='!isLoggedIn()'>Log In</button>
+          <button (click)="logout()" *ngIf="isLoggedIn()">Log Out</button>
+          <p *ngIf="isLoggedIn()">{{getUserProfile() | async | json}}</p>
+          <!-- <li *ngFor='let genre of genres'>
+            {{genre}}
+          </li> -->
+          <button (click)="storeIdentityTokensInSessionStorage()">storeAccessTokensSessionStorage</button>
+          <button (click)="hitFacebookAPI()">Hit Facebook API</button>
+          <button (click)="hitYoutubeAPI()">Hit Youtube Endpoint</button>
+        </div>
+        
+        
       </ul>
     </div>
     <!-- Hidden Dropdown info -->

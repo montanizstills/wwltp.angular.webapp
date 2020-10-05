@@ -12,6 +12,14 @@ import {  NewsService } from 'src/app/app_services/news.service'
   styleUrls: ['./mainpage.component.scss']
 })
 export class MainpageComponent implements OnInit {
+  
+  firstGenreItem = {
+    id: 1,
+    title:"title",
+    src: "source",
+    article: "The article named 'Article'",
+    date:"10/04/2020"
+  }
 
   videos = []
 
@@ -22,6 +30,6 @@ export class MainpageComponent implements OnInit {
     this.videos.push(this.domSanitizer.bypassSecurityTrustResourceUrl(this.twitchService.getLiveVideoURL("4d1eaa36-f750-4862-b7e9-d0a13970d535")));
   }
 
-  EsportsOneFeed = this.facebookService.getPageFeed("EsportsOne");
-  News = this.news.getNewsFromServer("https://www.reddit.com/r/esports/.rss")
+  // EsportsOneFeed = this.facebookService.getPageFeed("EsportsOne");
+  // News = this.news.getNewsFromServer("https://www.reddit.com/r/esports/.rss")
 }
