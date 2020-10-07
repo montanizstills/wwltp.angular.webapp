@@ -1,4 +1,4 @@
-const myDirective = require('../app/directives/myDirective.directive')
+// const myDirective = require('../app/directives/myDirective.directive')
 
 test("myDirective", () => {
 

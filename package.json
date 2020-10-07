@@ -35,18 +35,7 @@
     "codelyzer": "^5.1.2",
     "eslint": "^7.4.0",
     "jest": "^26.4.2",
-    "ts-jest": "^26.4.1",
     "ts-node": "~8.3.0",
     "typescript": "~4.0.3"
-  },
-  "jest": {
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "<rootDir>/tsconfig.spec.json"
-      }
-    },
-    "moduleDirectories": [
-      "node_modules"
-    ]
   }
 }
