@@ -1,4 +1,1 @@
-<p appMyDirective>Action</p>
-<p appMyDirective>Adventure</p>
-<p appMyDirective>Sport</p>
-<p appMyDirective>Shooter</p>
+<navbar *ngFor='let item of list' appMyDirective [item]='item' ></navbar>

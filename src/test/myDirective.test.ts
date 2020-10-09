@@ -1,40 +1,10 @@
 import { TestBed } from '@angular/core/testing'
 import { By } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { MyDirective } from 'src/app/directives/myDirective.directive';
 
-test("myDirective", () => {
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                MyDirective,
-                HeaderComponent
-            ]
-        })
-
-        var fixtures = TestBed.overrideComponent(HeaderComponent, {
-            set: {
-                template: '<p appMyDirective>'
-            }
-        })
-
-
-        const fixture = TestBed.createComponent(HeaderComponent)
-        const el = fixture.debugElement.query(By.directive(MyDirective))
-        const directiveInstance = el.injector.get(MyDirective)
-        expect(directiveInstance.isCategory).toBe(true)
-
-        el.query(By.css('appMyDirective'))
-        var component = fixture.componentInstance; // Instance of HeaderComponent
-        // TestBed.inject(MyDirective) -- preferred over TestBed.get()
-
-    })
-
-
-    //use createComponent instead of overrideComponent, then,  test all elements of the component
-
-
-    /*  //given
+/*  //given
       var expected = new HTMLElement();
       var expectedAttributeName = 'color'
       var expectedAttributeValue = 'red'
@@ -53,4 +23,31 @@ test("myDirective", () => {
       expect(actual).toHaveProperty(expectedAttributeName, expectedAttributeValue);
   
       */
+
+beforeEach(() => {
+    TestBed.resetTestEnvironment();
+    // TestBed.initTestEnvironment(BrowserDynamicTestingModule,platformBrowserDynamicTesting())
+    TestBed.configureTestingModule({
+        declarations: [
+            MyDirective,
+            HeaderComponent
+        ]
+    })
+
+    // use createComponent instead of overrideComponent, then,  test all elements of the component
+    // TestBed.overrideComponent(HeaderComponent, {
+    //     set: {
+    //         template: '<p appMyDirective>'
+    //     }
+    // })
+
+})
+
+test("myDirective", () => {
+    const fixture = TestBed.createComponent(HeaderComponent)
+    const el = fixture.debugElement.query(By.directive(MyDirective))
+    const directiveInstance = el.injector.get(MyDirective)
+    el.query(By.css('appMyDirective'))
+    expect(directiveInstance.isCategory).toBe(true)
+
 });
