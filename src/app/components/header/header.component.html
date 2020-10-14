@@ -1,3 +1,10 @@
 <div *ngIf='true'>
-    <app-navbar [ngClass]="" *ngFor='let item of list' [appMyDirective]="item.isCategory" [setFontFamily]="item.fontFamily" (deleteProperty)='onItemDelete($event)' [item]='item'> </app-navbar>
+    <app-navbar 
+        [ngClass]="" 
+        *ngFor='let item of list'
+        [appMyDirective]="item.isCategory"
+        [setFontFamily]="item.fontFamily"
+        (deleteProperty)='onItemDelete($event)'
+        [item]='item'>
+    </app-navbar>
 </div>
