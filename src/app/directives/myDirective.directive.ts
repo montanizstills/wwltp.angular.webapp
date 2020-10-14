@@ -17,9 +17,9 @@ export class MyDirective {
     this.hovering = false;
   }
  
-  // breaks isCategory directive-binding
-  // @Input() set appMyDirective(value) {
-  //   this.isCategory = value
-  // }
+  @Input() set  appMyDirective(value) {
+    this.isCategory = value
+  }
+ 
 
 }

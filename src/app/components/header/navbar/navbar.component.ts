@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-navbar',
@@ -6,12 +7,16 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  
+
   @Input() item;
-  
+  @Output() deletePorperty = new EventEmitter()
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onDelete() {
+    this.deletePorperty.emit(this.item)
+  }
 }

@@ -8,6 +8,7 @@ import { NavbarComponent } from './components/header/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MyDirective } from './directives/myDirective.directive';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -17,14 +18,14 @@ import { MyDirective } from './directives/myDirective.directive';
     NavbarComponent,
     FooterComponent,
     HeaderComponent,
-    MyDirective,
-
+    MyDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    
   ],
-  providers: [],
+  providers: [CommonModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

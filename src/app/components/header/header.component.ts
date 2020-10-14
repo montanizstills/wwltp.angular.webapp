@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
       id: 2,
       name: 'Sport',
       date: '',
-      isCategory: true
+      isCategory: false
     }
   ];
 
@@ -35,4 +35,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onItemDelete(item) {
+
+  }
 }

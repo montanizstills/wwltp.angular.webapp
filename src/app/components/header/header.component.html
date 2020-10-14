@@ -1,1 +1,3 @@
-<app-navbar *ngFor='let item of list' appMyDirective [item]='item' ></app-navbar>
+<ng-template [ngIf]='true'>
+    <app-navbar [ngClass]="" *ngFor='let item of list' [appMyDirective]="item.isCategory" (deleteProperty)='onItemDelete($event)' [item]='item'></app-navbar>
+</ng-template>
