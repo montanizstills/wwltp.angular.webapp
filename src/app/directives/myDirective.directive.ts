@@ -4,22 +4,26 @@ import { Directive, HostBinding, HostListener, Input } from '@angular/core';
   selector: '[appMyDirective]'
 })
 export class MyDirective {
- 
+
   @HostBinding('class.is-category') isCategory = true;
- 
+
   @HostBinding('class.is-category-hovering') hovering = false;
- 
+
+  @HostBinding('class.is-font') fontFamily;
+
   @HostListener('mouseenter') onMyMouseEnter() {
     this.hovering = true
   }
- 
+
   @HostListener('mouseleave') onMyMouseLeave() {
     this.hovering = false;
   }
- 
-  @Input() set  appMyDirective(value) {
+
+  @Input() set appMyDirective(value) {
     this.isCategory = value
   }
- 
 
+  @Input() set setFontFamily(value:String) {
+    this.fontFamily = value
+  }
 }

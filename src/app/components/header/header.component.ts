@@ -11,19 +11,20 @@ export class HeaderComponent implements OnInit {
     {
       id: 0,
       name: 'Action',
-      date: '',
-      isCategory: true
+      date: '10/31/2003',
+      isCategory: true,
+      fontFamily:'cursive'
     },
     {
       id: 1,
       name: 'Adventure',
-      date: '',
+      date: '04/01/1999',
       isCategory: true
     },
     {
       id: 2,
       name: 'Sport',
-      date: '',
+      date: '08/07/1955',
       isCategory: false
     }
   ];
