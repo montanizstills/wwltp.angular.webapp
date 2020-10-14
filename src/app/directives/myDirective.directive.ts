@@ -9,7 +9,7 @@ export class MyDirective {
 
   @HostBinding('class.is-category-hovering') hovering = false;
 
-  @HostBinding('class.is-font') fontFamily;
+  @HostBinding('style.font-family') fontFamily;
 
   @HostListener('mouseenter') onMyMouseEnter() {
     this.hovering = true
@@ -19,7 +19,7 @@ export class MyDirective {
     this.hovering = false;
   }
 
-  @Input() set appMyDirective(value) {
+  @Input() set appMyDirective(value:boolean) {
     this.isCategory = value
   }
 
