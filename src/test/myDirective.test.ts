@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing'
 import { By } from '@angular/platform-browser';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { MyDirective } from 'src/app/directives/myDirective.directive';
 
@@ -24,7 +23,10 @@ import { MyDirective } from 'src/app/directives/myDirective.directive';
   
       */
 
-beforeEach(() => {
+
+test("myDirective", () => {
+
+   beforeEach(()=>{
     TestBed.resetTestEnvironment();
     // TestBed.initTestEnvironment(BrowserDynamicTestingModule,platformBrowserDynamicTesting())
     TestBed.configureTestingModule({
@@ -34,6 +36,16 @@ beforeEach(() => {
         ]
     })
 
+    const fixture = TestBed.createComponent(HeaderComponent)
+    const el = fixture.debugElement.query(By.directive(MyDirective))
+    const directiveInstance = el.injector.get(MyDirective)
+    el.query(By.css('appMyDirective'))
+    // console.log(el.query(By.directive(MyDirective)).properties)
+    expect(directiveInstance.isCategory).toBe(true)
+   })
+
+});
+
     // use createComponent instead of overrideComponent, then,  test all elements of the component
     // TestBed.overrideComponent(HeaderComponent, {
     //     set: {
@@ -41,13 +53,3 @@ beforeEach(() => {
     //     }
     // })
 
-})
-
-test("myDirective", () => {
-    const fixture = TestBed.createComponent(HeaderComponent)
-    const el = fixture.debugElement.query(By.directive(MyDirective))
-    const directiveInstance = el.injector.get(MyDirective)
-    el.query(By.css('appMyDirective'))
-    expect(directiveInstance.isCategory).toBe(true)
-
-});
