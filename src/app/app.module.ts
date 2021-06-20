@@ -12,6 +12,11 @@ import { CommonModule } from '@angular/common';
 
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    
+  ],
   declarations: [
     AppComponent,
     MainpageComponent,
@@ -20,12 +25,7 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     MyDirective
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    
-  ],
   providers: [CommonModule],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
